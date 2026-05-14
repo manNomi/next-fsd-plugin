@@ -32,6 +32,10 @@ Use this after implementation and review, before submitting a frontend assignmen
 - FSD `entities/` vs `shared/` boundary explanation
 - final changed files
 - feature-sized commit grouping
+- target branch pushed, especially `feature` when required
+- PR URL and submission link readiness
+- deadline and no-commit-after-submit rules
+- ignored-test rationale
 - unnecessary code
 - console logs
 - unused dependencies
@@ -41,7 +45,7 @@ Use this after implementation and review, before submitting a frontend assignmen
 
 ### 1. Submission readiness
 
-State whether the project is ready, nearly ready, or blocked.
+State whether the project is ready, nearly ready, or blocked. Include whether the PR can be submitted before the deadline and whether post-submit freeze is required.
 
 ### 2. README improvements
 
@@ -50,7 +54,7 @@ Require Design Rationale, API / Cache Strategy, React Query Trade-off, FSD Bound
 
 ### 3. Verification commands
 
-List install, dev, build, lint, typecheck, test, and manual verification commands.
+List install, dev, build, lint, typecheck, trusted test, ignored test, and manual verification commands.
 
 ### 4. Implementation summary
 
@@ -72,7 +76,7 @@ List limitations honestly. Do not invent future work to hide unfinished basics.
 
 ### 8. Cleanup checklist
 
-List concrete cleanup tasks: logs, unused files, unused dependencies, formatting, dead code, TODOs, final diff scan, and feature-sized commit groups.
+List concrete cleanup tasks: logs, unused files, unused dependencies, formatting, dead code, TODOs, final diff scan, feature-sized commit groups, target branch push, PR URL, submission link, and no post-submit commits.
 
 ### 9. Final message draft
 

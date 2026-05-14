@@ -26,6 +26,8 @@ Use this before submission or after implementing a meaningful slice. Prioritize 
 - accessibility
 - unnecessary dependencies
 - README explanation
+- commerce order flow correctness
+- assignment submission rules
 
 ## Severity
 
@@ -58,6 +60,16 @@ Test quality smell:
 - Tests assert implementation details instead of user-visible state transitions.
 - Page tests ignore loading, error, empty, disabled, retry, pending, and accessibility states.
 - Pure logic such as mappers, grouping, formatters, validation, and partial failure loaders lacks regression coverage.
+
+Commerce order flow smell:
+
+- Option display order differs from the API without a documented reason.
+- Required option validation is missing or only enforced after building an invalid payload.
+- Cart grouping ignores selected options or treats the same option set as different due to unstable ordering.
+- Total count or total price differs between menu CTA, cart CTA, payload, and completion view.
+- Submit can run twice because pending/disabled state is missing.
+- API 400/404 or network failure is swallowed without user-visible feedback.
+- Tests marked as ignored by the assignment are used as blocking verification.
 
 ## Output format
 
@@ -100,11 +112,15 @@ Review low-value tests, bug-locking tests, missing regression coverage, pure log
 
 Review loading, error, empty, disabled, pending, duplicate action, network failure, stale data, and invalid data behavior.
 
-### 10. README / submission review
+### 10. Commerce order flow review
 
-Review install/dev/build/test instructions, Design Rationale, API / Cache Strategy, React Query Trade-off, FSD Boundary, Error Handling Strategy, Test Strategy, limitations, and verification evidence.
+Review catalog/menu filtering, item detail loading, option rule matrix, cart grouping, price calculation, order payload, duplicate submit prevention, order completion lookup, and Toast/error behavior.
 
-### 11. Recommended patch plan
+### 11. README / submission review
+
+Review install/dev/build/test instructions, ignored-test rationale, feature branch/PR requirements, no-commit-after-submit rule, Design Rationale, API / Cache Strategy, React Query Trade-off, FSD Boundary, Error Handling Strategy, Test Strategy, limitations, and verification evidence.
+
+### 12. Recommended patch plan
 
 Provide an ordered patch plan that starts with Critical issues, then Important improvements, then polish.
 Group recommended fixes into feature-sized commit candidates when useful.

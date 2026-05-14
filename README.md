@@ -59,6 +59,8 @@ Use the plugin skills with the marketplace namespace:
 
 ```text
 $toss-place-fe-superpowers:assignment-forensics
+$toss-place-fe-superpowers:timeboxed-assignment-operator
+$toss-place-fe-superpowers:commerce-order-flow-auditor
 $toss-place-fe-superpowers:product-assignment-strategist
 $toss-place-fe-superpowers:stack-setup-planner
 $toss-place-fe-superpowers:next-rsc-architect
@@ -97,6 +99,18 @@ For product-focused assignment strategy:
 ```text
 $toss-place-fe-superpowers:product-assignment-strategist
 이 제품 중심 프론트엔드 과제를 기존 코드베이스 적응, 가정, 트레이드오프, README 제출 전략까지 포함해서 분석해줘.
+```
+
+For a 24-hour commerce/order assignment:
+
+```text
+$toss-place-fe-superpowers:timeboxed-assignment-operator
+Run this assignment around deadline, feature branch, trusted tests, ignored E2E, PR timing, and no-commit-after-submit freeze.
+```
+
+```text
+$toss-place-fe-superpowers:commerce-order-flow-auditor
+Audit menu, option selection, cart grouping, pricing, order payload, duplicate submit, Toast errors, and completion flow.
 ```
 
 For a React/Next.js performance review:

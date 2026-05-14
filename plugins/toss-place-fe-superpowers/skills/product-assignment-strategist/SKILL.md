@@ -12,6 +12,7 @@ Use this before implementation for product-focused frontend assignments. Treat T
 - Do not implement before analyzing requirements and the existing codebase.
 - Do not replace existing architecture without evidence.
 - Do not ignore provided design system components.
+- Do not ignore provided markup, mock APIs, fixtures, or HTTP clients.
 - Do not hide unclear requirements. Record them as assumptions.
 - Do not optimize rare edge cases with heavy abstractions unless the product risk justifies it.
 - Do not claim completion without verification.
@@ -19,13 +20,13 @@ Use this before implementation for product-focused frontend assignments. Treat T
 
 ## Workflow
 
-1. Read the assignment prompt, README, TODOs, API docs, screenshots, and design references.
-2. Inspect the existing codebase before planning: routing, page structure, components, design system, API/mock layer, state management, tests, and scripts.
+1. Read the assignment prompt, README, TODOs, API docs, screenshots, design references, deadline rules, and submission rules.
+2. Inspect the existing codebase before planning: routing, page structure, existing markup, components, design system, API/mock layer, provided HTTP client, state management, tests, and scripts.
 3. Infer the product domain and user flow.
 4. Separate explicit requirements from likely reviewer expectations.
 5. Draft assumptions and trade-offs.
 6. Ask the user to confirm or revise assumptions before implementation.
-7. Plan implementation using existing patterns first.
+7. Plan implementation using existing patterns, provided components, existing markup, mock API conventions, and provided HTTP client first.
 8. Cover loading, error, empty, disabled, pending, retry, duplicate submit, mobile, and accessibility states.
 9. Define deterministic and manual verification.
 10. Plan README sections for assumptions, decisions, trade-offs, exception handling, AI usage, and verification.
@@ -34,6 +35,10 @@ Use this before implementation for product-focused frontend assignments. Treat T
 
 - Prefer existing routing, component, state, API, and test patterns.
 - Use design system components first.
+- Reuse provided markup and styling before rebuilding UI.
+- Use the provided HTTP client or API wrapper when the assignment asks for it.
+- Treat mock APIs, fixtures, and server handlers as source-of-truth contracts unless the assignment says otherwise.
+- If E2E tests are explicitly marked stale or out of scope, exclude them from pass/fail evidence and document the reason.
 - Add abstractions only when repeated behavior or domain boundaries justify them.
 - Keep reviewer-readable code over clever code.
 - In Next.js, keep `app/` as routing shell and put real page composition in `views/`.
@@ -79,7 +84,7 @@ Separate explicit requirements from unclear requirements.
 
 ### 3. 기존 코드베이스 조사 계획
 
-List files, patterns, scripts, design system, API/mock, and test setup to inspect before coding.
+List files, patterns, scripts, design system, existing markup, provided HTTP client, API/mock, fixtures, and test setup to inspect before coding.
 
 ### 4. 도메인 / 사용자 플로우 추론
 
@@ -103,7 +108,7 @@ Plan the smallest implementation that respects existing patterns and handles imp
 
 ### 9. 검증 전략
 
-List build/lint/typecheck/test/manual checks and design comparison when relevant.
+List build/lint/typecheck/test/manual checks, ignored-test rationale, deadline checks, and design comparison when relevant.
 
 ### 10. README 작성 계획
 

@@ -9,6 +9,7 @@ A Codex skill pack for frontend take-home assignments, inspired by Superpowers, 
 This plugin prevents jumping directly into code and instead enforces:
 
 - requirement analysis
+- 24-hour deadline and submission operation
 - product-focused assignment strategy
 - assumptions and trade-off planning
 - stack selection
@@ -26,6 +27,7 @@ This plugin prevents jumping directly into code and instead enforces:
 - optional parallel subagent orchestration
 - optional git delivery subagent for commit/push/PR
 - upstream PR safety checks
+- commerce order-flow auditing
 - final submission polish
 
 ## When to use
@@ -33,6 +35,8 @@ This plugin prevents jumping directly into code and instead enforces:
 Use this plugin when:
 
 - starting a frontend assignment
+- running a strict 24-hour assignment with branch, PR, and no-post-submit-commit rules
+- auditing menu, option, cart, order submit, and order completion flows
 - deciding between Vite and Next.js
 - designing Next.js RSC architecture
 - deciding static rendering, ISR, revalidation, and `no-store` boundaries
@@ -55,22 +59,24 @@ Use this plugin when:
 
 Use this when you want to control each step yourself:
 
-1. `$toss-place-fe-superpowers:planning-feedback-loop`
-2. `$toss-place-fe-superpowers:product-assignment-strategist`
-3. `$toss-place-fe-superpowers:assignment-forensics`
-4. `$toss-place-fe-superpowers:stack-setup-planner`
-5. `$toss-place-fe-superpowers:next-rsc-architect`
-6. `$toss-place-fe-superpowers:simple-fsd-architect`
-7. `$toss-place-fe-superpowers:api-layer-designer`
-8. `$toss-place-fe-superpowers:component-boundary-planner`
-9. `$toss-place-fe-superpowers:reliability-first-planner`
-10. `$toss-place-fe-superpowers:react-best-practices`
-11. `$toss-place-fe-superpowers:toss-fe-code-review`
-12. `$toss-place-fe-superpowers:test-quality-reviewer`
-13. `$toss-place-fe-superpowers:offline-edge-case-checker`
-14. `$toss-place-fe-superpowers:readme-rationale-writer`
-15. `$toss-place-fe-superpowers:final-submit-polisher`
-16. `$toss-place-fe-superpowers:commit-push-pr-agent`
+1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
+2. `$toss-place-fe-superpowers:planning-feedback-loop`
+3. `$toss-place-fe-superpowers:product-assignment-strategist`
+4. `$toss-place-fe-superpowers:assignment-forensics`
+5. `$toss-place-fe-superpowers:commerce-order-flow-auditor`
+6. `$toss-place-fe-superpowers:stack-setup-planner`
+7. `$toss-place-fe-superpowers:next-rsc-architect`
+8. `$toss-place-fe-superpowers:simple-fsd-architect`
+9. `$toss-place-fe-superpowers:api-layer-designer`
+10. `$toss-place-fe-superpowers:component-boundary-planner`
+11. `$toss-place-fe-superpowers:reliability-first-planner`
+12. `$toss-place-fe-superpowers:react-best-practices`
+13. `$toss-place-fe-superpowers:toss-fe-code-review`
+14. `$toss-place-fe-superpowers:test-quality-reviewer`
+15. `$toss-place-fe-superpowers:offline-edge-case-checker`
+16. `$toss-place-fe-superpowers:readme-rationale-writer`
+17. `$toss-place-fe-superpowers:final-submit-polisher`
+18. `$toss-place-fe-superpowers:commit-push-pr-agent`
 
 When this plugin is installed through a Codex marketplace, use the namespaced skill names above.
 
@@ -88,11 +94,24 @@ The planning feedback loop restates the goal, drafts a plan, asks for focused fe
 
 Use this when the assignment may evaluate existing codebase adaptation, product judgment, assumptions, trade-offs, reviewer-readable code, README quality, or AI usage verification:
 
-1. `$toss-place-fe-superpowers:planning-feedback-loop`
-2. `$toss-place-fe-superpowers:product-assignment-strategist`
-3. `$toss-place-fe-superpowers:assignment-forensics`
+1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
+2. `$toss-place-fe-superpowers:planning-feedback-loop`
+3. `$toss-place-fe-superpowers:product-assignment-strategist`
+4. `$toss-place-fe-superpowers:assignment-forensics`
 
 The product assignment strategist treats Toss-style context as likely evaluation context, not official fact. It forces assumptions, trade-offs, existing codebase inspection, and README strategy before implementation.
+
+### 24-hour commerce assignment workflow
+
+Use this when the assignment resembles an offline-commerce order flow with a hard deadline, feature branch, PR submission, ignored tests, menus, options, cart, order submit, or completion screens:
+
+1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
+2. `$toss-place-fe-superpowers:product-assignment-strategist`
+3. `$toss-place-fe-superpowers:assignment-forensics`
+4. `$toss-place-fe-superpowers:commerce-order-flow-auditor`
+5. Continue with architecture, implementation, review, final polish, and git delivery skills.
+
+This workflow treats deadline rules as requirements. It also audits option rules, cart grouping, price calculation, payload correctness, duplicate submit prevention, Toast/error handling, and final no-commit-after-submit freeze.
 
 ### End-to-end orchestrator workflow
 
@@ -118,6 +137,20 @@ Use this when work must be pushed or proposed to a repository you do not fully c
 If any check fails, the git delivery agent should stop before opening a PR and report the blocker. A domain-specific or project-specific change should usually become a standalone plugin, fork change, or private workflow instead of an upstream core PR.
 
 ## Example prompts
+
+### `$toss-place-fe-superpowers:timeboxed-assignment-operator`
+
+```text
+$toss-place-fe-superpowers:timeboxed-assignment-operator
+Plan this 24-hour frontend assignment around deadline, feature branch, trusted tests, ignored E2E, PR timing, and final no-commit freeze.
+```
+
+### `$toss-place-fe-superpowers:commerce-order-flow-auditor`
+
+```text
+$toss-place-fe-superpowers:commerce-order-flow-auditor
+Audit this commerce order assignment for menu, option selection, cart grouping, pricing, order payload, duplicate submit, Toast errors, and completion flow.
+```
 
 ### `$toss-place-fe-superpowers:planning-feedback-loop`
 
@@ -279,6 +312,9 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Align React Query `staleTime` with the Next.js server cache strategy.
 - Review React performance in impact order: waterfalls, bundle size, RSC/cache/data fetching, then re-renders.
 - Review tests by behavior value: regression, state transition, pure logic, accessibility, and failure modes before static copy.
+- Treat assignment-ignored tests as non-blocking and document why.
+- Treat deadline, target branch, PR submission, and post-submit freeze rules as requirements.
+- Audit commerce order flows through API contract, option rules, cart grouping, pricing, payload, submit, and completion state machines.
 - Separate pure API functions from React Query hooks.
 - Keep query option factories reusable across `prefetchQuery`, hydration, and hooks.
 - Use Simple FSD without over-engineering.
@@ -312,3 +348,5 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - If worker write scopes overlap, the main thread must stop and coordinate before continuing.
 - Feature-sized commits depend on a clean diff and clear slice boundaries.
 - Upstream PR safety checks depend on available repository instructions, GitHub search access, and honest problem evidence.
+- Timeboxed assignment guidance depends on the user providing or confirming the real deadline and submission route.
+- Commerce order-flow checks are intentionally specialized and should be adapted when the assignment is not an order/cart domain.

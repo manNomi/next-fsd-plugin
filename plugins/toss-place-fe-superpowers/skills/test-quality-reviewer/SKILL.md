@@ -11,6 +11,8 @@ Use this after tests are written or during code review when the assignment inclu
 
 Good tests protect requirements and user-visible state transitions. Low-value tests only prove that text renders. Dangerous tests can lock in the current bug.
 
+If the assignment explicitly says an E2E test or existing test does not reflect the requirements, do not use that test as blocking verification. Mark it as ignored by assignment instruction and document the reason.
+
 ## Review priorities
 
 1. Find tests that lock in incorrect behavior.
@@ -36,6 +38,7 @@ Good tests protect requirements and user-visible state transitions. Low-value te
 - Error roles, retry buttons, empty states, and invalid data behavior.
 - Accessibility states such as `aria-expanded`, disabled controls, alert/error role, and keyboard/touch behavior.
 - React Query mutation/invalidation or retry behavior when client server state is meaningful.
+- Commerce/order logic: option min/max validation, cart grouping, price calculation, order payload shape, duplicate submit prevention, API error handling, and order completion not-found behavior.
 
 ## Output format
 
@@ -53,8 +56,8 @@ List tests that appear to encode current broken behavior as expected behavior. E
 
 ### 4. Missing regression coverage
 
-List missing tests for partial failure, retry, duplicate action prevention, validation, edge cases, accessibility, and mapper/formatter logic.
+List missing tests for partial failure, retry, duplicate action prevention, validation, edge cases, accessibility, mapper/formatter logic, option rules, cart grouping, price calculation, and order payload correctness.
 
 ### 5. Recommended test patch plan
 
-Give an ordered plan: delete or rewrite low-value tests, fix bug-locking tests, add high-value regression tests, then run verification.
+Give an ordered plan: mark assignment-ignored tests as non-blocking, delete or rewrite low-value tests, fix bug-locking tests, add high-value regression tests, then run verification.

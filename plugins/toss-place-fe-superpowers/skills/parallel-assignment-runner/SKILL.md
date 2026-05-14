@@ -21,12 +21,15 @@ This skill does not create a new runtime. It is a Codex subagent orchestration w
 - Worker output is not final. The main thread must inspect, integrate, and verify it.
 - Reviewer agents must be read-only unless the user explicitly asks otherwise.
 - Never claim the result is perfect. Report residual risk honestly.
+- In a hard deadline assignment, do not spawn new implementation workers during the final 90 minutes. Use that time for verification, README, PR, submission, and read-only review only.
 
 ## Related skills
 
 Use these skills as checkpoints inside the orchestration:
 
 - `$toss-place-fe-superpowers:assignment-forensics` (`$assignment-forensics`)
+- `$toss-place-fe-superpowers:timeboxed-assignment-operator` (`$timeboxed-assignment-operator`)
+- `$toss-place-fe-superpowers:commerce-order-flow-auditor` (`$commerce-order-flow-auditor`)
 - `$toss-place-fe-superpowers:stack-setup-planner` (`$stack-setup-planner`)
 - `$toss-place-fe-superpowers:next-rsc-architect` (`$next-rsc-architect`)
 - `$toss-place-fe-superpowers:simple-fsd-architect` (`$simple-fsd-architect`)
@@ -43,9 +46,9 @@ Use these skills as checkpoints inside the orchestration:
 
 ## Workflow
 
-1. Understand the assignment and existing code before editing.
-2. Summarize MVP, hidden evaluation points, and reliability risks.
-3. Choose stack, architecture, API, state, and component boundary strategy.
+1. Understand the assignment, deadline, submission rules, and existing code before editing.
+2. Summarize MVP, hidden evaluation points, reliability risks, and timebox constraints.
+3. Choose stack, architecture, API, state, component boundary, and test-trust strategy.
 4. Decompose work into independent slices.
 5. Define each worker's responsibility and allowed write scope.
 6. Run workers in parallel only for independent slices.
@@ -67,9 +70,19 @@ Prefer slices like:
 - Server/data architecture: Server Components, caching, ISR/revalidate, request freshness.
 - Client interaction: small Client Component boundaries, forms, local state, pending/disabled states.
 - UI states: loading, error, empty, invalid, long text, responsive layout.
+- Commerce flow slices: catalog/menu, item detail and option selection, cart grouping and pricing, order submit, order completion.
 - README/submission: setup commands, decisions, trade-offs, verification evidence.
 
 Avoid slices that overlap on the same page component, shared provider, package config, or README unless the main thread owns that file and integrates worker findings manually.
+
+For 24-hour commerce assignments, prefer these worker boundaries when the codebase allows them:
+
+- API/domain model worker: API contract types, mappers, option validation, cart grouping, price calculation.
+- Menu worker: catalog load, category filter, item list, cart CTA summary.
+- Detail/options worker: item detail load, option UI, min/max validation, selected option state, add-to-cart transition.
+- Cart/order worker: grouped cart view, quantity/remove, total count/price, submit payload, pending/disabled/error states.
+- Completion worker: order lookup, total display, not-found behavior, return-to-menu transition.
+- README/verification worker: read-only or narrow write scope for documentation after implementation decisions are known.
 
 ## Feature-sized commit discipline
 

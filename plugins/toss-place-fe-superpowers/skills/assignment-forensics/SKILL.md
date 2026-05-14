@@ -16,10 +16,11 @@ Do not write code, scaffold a project, install dependencies, or create files dur
 - Original assignment text, rubric, API docs, design files, screenshots, and README.
 - All page screenshots and Figma/design references when available.
 - Required user flows, data fields, validation rules, and submission rules.
+- Deadline, target branch, PR/submission rules, no-commit-after-submit rules, and any tests the assignment says to ignore.
 - Product context: offline store use, POS/kiosk/table order/payment/order/dashboard behavior.
 - Evaluation signals: reliability, maintainability, edge cases, code organization, README clarity.
 - Setup implications from design comparison: routes, page states, responsive requirements, styling system, assets, and verification screenshots.
-- Requirement conflicts or ambiguous instructions, such as Next.js backend wording while backend implementation is forbidden, React Query requirements conflicting with RSC/ISR choices, or multiple APIs that overlap in responsibility.
+- Requirement conflicts or ambiguous instructions, such as tests that exist but must be ignored, incomplete work still requiring PR submission, library freedom versus familiar-method guidance, Next.js backend wording while backend implementation is forbidden, React Query requirements conflicting with RSC/ISR choices, or multiple APIs that overlap in responsibility.
 
 ## Output format
 
@@ -36,27 +37,31 @@ List explicit requirements from the assignment. Separate UI, data, behavior, sty
 Create a table with columns: requirement, possible conflict, chosen interpretation, rationale, README note.
 If no conflict exists, say so explicitly.
 
-### 4. 숨은 평가 포인트
+### 4. 제출 운영 규칙
+
+Extract deadline, timezone, target branch, PR/submission link flow, post-submit commit restrictions, ignored tests, required setup steps, and any collaborator or repository access tasks.
+
+### 5. 숨은 평가 포인트
 
 Infer likely reviewer expectations. Include reliability, state design, architecture simplicity, accessibility, loading/error/empty states, and README explanation.
 
-### 5. 핵심 사용자 흐름
+### 6. 핵심 사용자 흐름
 
 List the main flows from user intent to result. Include happy path and any blocked/pending states.
 
-### 6. 비즈니스 규칙
+### 7. 비즈니스 규칙
 
 Extract rules that affect correctness: validation, ordering, pricing, selection, payment/order state, permissions, filtering, sorting, cache freshness, or retry behavior.
 
-### 7. 안정성 리스크
+### 8. 안정성 리스크
 
 Identify risks that could break trust in an offline commerce product: duplicate submits, stale data, network failure, slow response, refresh during pending action, invalid API response, disabled state gaps, and inconsistent local state.
 
-### 8. 엣지 케이스
+### 9. 엣지 케이스
 
 List concrete edge cases the implementation should handle or explicitly document as out of scope.
 
-### 9. 구현 우선순위
+### 10. 구현 우선순위
 
 #### MVP
 
@@ -70,11 +75,11 @@ Improvements that strengthen reviewer confidence without expanding product scope
 
 Only include items that are genuinely optional. Do not let optional work block core reliability.
 
-### 10. 구현 체크리스트
+### 11. 구현 체크리스트
 
 Create a practical checklist that can guide implementation. Include data, UI states, state transitions, API handling, tests, and README tasks.
 Include a screenshot/Figma comparison checklist when visual references exist.
 
-### 11. 제출 체크리스트
+### 12. 제출 체크리스트
 
-List final submission checks: install/dev/build/test commands, README decisions, known limitations, screenshots if needed, final diff cleanup, and verification evidence.
+List final submission checks: install/dev/build/test commands, README decisions, known limitations, screenshots if needed, final diff cleanup, verification evidence, PR URL, target branch pushed, submission link ready, and no post-submit commits.

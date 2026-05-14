@@ -14,6 +14,7 @@ This plugin prevents jumping directly into code and instead enforces:
 - Simple FSD architecture
 - API layer separation
 - re-render-aware component boundaries
+- React/Next.js performance best-practice review
 - reliability review
 - review-fix loops
 - planning feedback loops
@@ -27,8 +28,10 @@ Use this plugin when:
 - starting a frontend assignment
 - deciding between Vite and Next.js
 - designing Next.js RSC architecture
+- deciding static rendering, ISR, revalidation, and `no-store` boundaries
 - designing API and React Query layers
 - splitting components
+- reviewing React/Next.js performance risks
 - reviewing code before submission
 - planning a non-trivial implementation before coding
 - running an end-to-end assignment workflow with explicitly requested parallel agents
@@ -48,9 +51,10 @@ Use this when you want to control each step yourself:
 6. `$toss-place-fe-superpowers:api-layer-designer`
 7. `$toss-place-fe-superpowers:component-boundary-planner`
 8. `$toss-place-fe-superpowers:reliability-first-planner`
-9. `$toss-place-fe-superpowers:toss-fe-code-review`
-10. `$toss-place-fe-superpowers:offline-edge-case-checker`
-11. `$toss-place-fe-superpowers:final-submit-polisher`
+9. `$toss-place-fe-superpowers:react-best-practices`
+10. `$toss-place-fe-superpowers:toss-fe-code-review`
+11. `$toss-place-fe-superpowers:offline-edge-case-checker`
+12. `$toss-place-fe-superpowers:final-submit-polisher`
 
 When this plugin is installed through a Codex marketplace, use the namespaced skill names above.
 
@@ -126,6 +130,11 @@ $toss-place-fe-superpowers:next-rsc-architect
 For this Next.js App Router assignment, decide what stays server-side, what needs client boundaries, and how caching should work.
 ```
 
+```text
+$toss-place-fe-superpowers:next-rsc-architect
+Plan cache-efficient Next.js architecture using static rendering, ISR, tag/path revalidation, no-store only where necessary, and React Query hydration where useful.
+```
+
 ### `$toss-place-fe-superpowers:simple-fsd-architect`
 
 ```text
@@ -145,6 +154,13 @@ Separate pure API functions, React Query hooks, query keys, types, and mappers f
 ```text
 $toss-place-fe-superpowers:component-boundary-planner
 Split components by state ownership, Server/Client boundaries, and re-render risk.
+```
+
+### `$toss-place-fe-superpowers:react-best-practices`
+
+```text
+$toss-place-fe-superpowers:react-best-practices
+Review this Next.js assignment with react-best-practices and prioritize waterfalls, bundle size, RSC boundaries, cache strategy, and re-render risks.
 ```
 
 ### `$toss-place-fe-superpowers:reliability-first-planner`
@@ -182,7 +198,11 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Keep `app/` as folder routing and delegate real page composition to `views/`.
 - Keep state as low as possible.
 - Cache what can be cached.
+- Prefer static rendering, `force-cache`, `revalidate`, ISR, and tag/path revalidation for public or periodically changing data.
+- Reserve `no-store` for user-specific, permission-specific, payment/order-progress, or always-fresh data.
 - Prefer React Query hydration when server-prefetched data should be consumed by client widgets through hooks.
+- Align React Query `staleTime` with the Next.js server cache strategy.
+- Review React performance in impact order: waterfalls, bundle size, RSC/cache/data fetching, then re-renders.
 - Separate pure API functions from React Query hooks.
 - Keep query option factories reusable across `prefetchQuery`, hydration, and hooks.
 - Use Simple FSD without over-engineering.

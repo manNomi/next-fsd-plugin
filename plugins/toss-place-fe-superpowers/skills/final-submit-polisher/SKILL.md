@@ -20,6 +20,8 @@ Use this after implementation and review, before submitting a frontend assignmen
 - known limitations
 - folder structure explanation
 - API/cache/state strategy explanation
+- static rendering, `revalidate`, ISR, tag/path revalidation, and `no-store` decisions
+- React Query hydration and `staleTime` explanation when used
 - final changed files
 - unnecessary code
 - console logs
@@ -47,6 +49,7 @@ Summarize what was built in reviewer-friendly language.
 ### 5. Key decisions
 
 List stack, architecture, API, cache, state, and component boundary decisions.
+For Next.js, explicitly include which routes/data are static, revalidated, tag/path invalidated, always fresh with `no-store`, or hydrated into React Query.
 
 ### 6. Trade-offs
 

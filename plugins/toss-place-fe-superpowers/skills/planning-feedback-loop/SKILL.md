@@ -246,8 +246,13 @@ For React/Next.js plans, check:
 - Can this be handled with Server Components?
 - Is the reason for each Client Component explicit?
 - Can state move lower in the tree?
-- Can ISR, fetch cache, or server-side fetching be used?
+- Can public or rarely changing pages be static or cacheable?
+- Can ISR, `fetch(..., { cache: "force-cache" })`, `next: { revalidate }`, or server-side fetching be used?
+- Does mutation require `next.tags`, `revalidateTag`, `revalidatePath`, or Server Action `updateTag`?
+- Is `no-store` limited to user-specific, permission-specific, payment/order-progress, or always-fresh data?
+- If the project uses Next Cache Components, should `use cache`, `cacheLife`, or `cacheTag` be part of the plan?
 - Can React Query hydration let client widgets call hooks where data is needed?
+- Is React Query hydration aligned with the Next server cache strategy instead of replacing it?
 - Is `app/` only a folder-routing shell that imports the real page from `views/`?
 - Can pure API functions and query hooks be separated?
 - Are component responsibilities clear?

@@ -92,6 +92,19 @@ When React Query is useful, design for hydration first:
 
 This maximizes local data access through hooks while keeping server prefetch, cache policy, and domain mapping centralized.
 
+## Next.js cache policy in API functions
+
+For pure API functions that can run in Server Components, make the freshness policy explicit:
+
+- Public and rarely changing data: use `cache: "force-cache"` or `next: { revalidate }`.
+- Periodically changing data: use `next: { revalidate: seconds }` or route-level ISR.
+- Cacheable data changed by mutations: add `next: { tags }` and plan `revalidateTag`, `revalidatePath`, or Server Action `updateTag`.
+- User-specific, permission-specific, payment/order-progress, or always-fresh data: use `cache: "no-store"`.
+- React Query `staleTime` should match or be shorter than the expected server cache freshness.
+- React Query hydration should reuse server-prefetched data in client widgets, not replace the Next.js server cache decision.
+
+If the project enables Next Cache Components, decide whether `use cache`, `cacheLife`, and `cacheTag` belong in the server data function before using fetch-cache options.
+
 ## Output format
 
 ### 1. Domain API inventory
@@ -106,7 +119,7 @@ Include query option files when React Query or hydration is used.
 ### 3. Pure API functions
 
 Define function names, inputs, outputs, cache options, and error behavior.
-For Next.js, state whether `fetch` uses `revalidate`, `force-cache`, or `no-store`.
+For Next.js, state whether `fetch` uses `force-cache`, `next.revalidate`, tags, path/tag revalidation, Cache Components, or `no-store`.
 
 ### 4. React Query hooks
 
@@ -122,7 +135,7 @@ Define API response types, domain model types, and mapping responsibilities.
 
 ### 7. Server Component usage
 
-Show which pure functions or query options can be called on the server and whether `prefetchQuery` plus `HydrationBoundary` is recommended.
+Show which pure functions or query options can be called on the server, what Next cache policy applies, and whether `prefetchQuery` plus `HydrationBoundary` is recommended.
 
 ### 8. Client Component usage
 
@@ -147,6 +160,12 @@ export type Stock = {
   updatedAt: Date;
 };
 
+type GetStockOptions = {
+  cache?: RequestCache;
+  revalidate?: number;
+  tags?: string[];
+};
+
 export const stockKeys = {
   all: ["stock"] as const,
   detail: (symbol: string) => [...stockKeys.all, symbol] as const,
@@ -155,8 +174,12 @@ export const stockKeys = {
 export const stockOptions = {
   detail: (symbol: string) => ({
     queryKey: stockKeys.detail(symbol),
-    queryFn: () => getStock(symbol),
-    staleTime: 30_000,
+    queryFn: () =>
+      getStock(symbol, {
+        revalidate: 60,
+        tags: ["stock", `stock:${symbol}`],
+      }),
+    staleTime: 60_000,
   }),
 };
 
@@ -168,8 +191,17 @@ export function mapStock(response: StockResponse): Stock {
   };
 }
 
-export async function getStock(symbol: string): Promise<Stock> {
-  const response = await fetch(`/api/stocks/${symbol}`);
+export async function getStock(symbol: string, options: GetStockOptions = {}): Promise<Stock> {
+  const isAlwaysFresh = options.cache === "no-store";
+  const response = await fetch(`https://api.example.com/stocks/${symbol}`, {
+    cache: isAlwaysFresh ? "no-store" : options.cache ?? "force-cache",
+    next: isAlwaysFresh
+      ? undefined
+      : {
+          revalidate: options.revalidate ?? 60,
+          tags: options.tags ?? ["stock", `stock:${symbol}`],
+        },
+  });
 
   if (!response.ok) {
     throw new Error("Failed to load stock");

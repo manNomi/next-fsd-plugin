@@ -55,7 +55,9 @@ List Minor polish items.
 
 ### 4. RSC / caching review
 
-Review Server Components, Client Components, `fetch` cache, `revalidate`, ISR, `no-store`, and over-clientification.
+Review Server Components, Client Components, static rendering, `fetch` cache, `next.revalidate`, ISR, tag/path revalidation, Cache Components when enabled, `no-store`, and over-clientification.
+Check that `no-store` is limited to user-specific, permission-specific, payment/order-progress, or always-fresh data.
+Check that React Query hydration complements the Next server cache strategy and that `staleTime` does not make stale data linger longer than intended.
 
 ### 5. State and re-render review
 

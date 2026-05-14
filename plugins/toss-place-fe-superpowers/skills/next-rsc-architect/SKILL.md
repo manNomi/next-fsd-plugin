@@ -30,17 +30,33 @@ export default function Page() {
 ## Decision checklist
 
 1. Which data can be fetched on the server?
-2. Which data can be cached?
-3. Which data needs ISR or `revalidate`?
-4. Which data must be `no-store`?
-5. Which UI requires browser APIs, event handlers, effects, local state, or React Query?
-6. Where should the Client Component boundary start?
-7. What props need to cross from Server to Client?
-8. Can the Client Component boundary be smaller?
-9. Is React Query actually needed?
-10. What can remain as pure Server Component UI?
-11. Should server-prefetched data be hydrated into React Query for child widgets?
-12. Which `views/` component owns the page-level `HydrationBoundary`?
+2. Which routes or sections can be static because they are public and rarely change?
+3. Which data can use `cache: "force-cache"`?
+4. Which data needs ISR or `next: { revalidate }`?
+5. Which cached data needs `next.tags`, `revalidateTag`, `revalidatePath`, or Server Action `updateTag` after mutation?
+6. Which data must be `no-store` because it is user-specific, permission-specific, payment/order-progress specific, or always fresh?
+7. Does this project enable Next Cache Components, and if so should it use `use cache`, `cacheLife`, or `cacheTag`?
+8. Which UI requires browser APIs, event handlers, effects, local state, or React Query?
+9. Where should the Client Component boundary start?
+10. What props need to cross from Server to Client?
+11. Can the Client Component boundary be smaller?
+12. Is React Query actually needed?
+13. What can remain as pure Server Component UI?
+14. Should server-prefetched data be hydrated into React Query for child widgets?
+15. Which `views/` component owns the page-level `HydrationBoundary`?
+
+## Cache decision routine
+
+Prefer the cheapest correct cache strategy:
+
+1. Static or `force-cache`: public, shared, and rarely changing data such as catalogs, static store information, marketing copy, configuration, and read-only lists.
+2. `next: { revalidate }` or ISR: data that can be stale for a known interval, such as dashboards, product lists, notices, or pickup/order summaries that do not need second-by-second freshness.
+3. Tag/path revalidation: data that is cacheable but must refresh after a mutation, such as product edits, order status changes, cart/payment side effects, or admin updates.
+4. `no-store`: user-specific, permission-specific, payment/order progress, checkout, inventory-critical, or other data where stale values can cause incorrect action.
+5. React Query stale time: align client cache freshness with the server cache. Do not use a long `staleTime` for data that server cache revalidates quickly or invalidates after mutation.
+6. Cache Components: if `cacheComponents: true` is enabled, explicitly decide whether `use cache`, `cacheLife`, and `cacheTag` fit the project before using the previous fetch-cache model.
+
+React Query hydration can reuse server-prefetched data in client widgets, but it should not hide or replace the Next.js server cache decision.
 
 ## React Query use cases
 
@@ -142,27 +158,31 @@ List the smallest interactive boundaries and why they require client execution.
 
 Specify `revalidate`, fetch cache, ISR, or `no-store` decisions.
 
-### 5. React Query usage
+### 5. Cache decision matrix
+
+Create a matrix with columns: route/data, static or `force-cache`, `revalidate` or ISR, tag/path revalidation, `no-store`, React Query `staleTime`, and Cache Components decision.
+
+### 6. React Query usage
 
 Say exactly where React Query is useful, whether hydration is recommended, where query options live, and which client widgets consume hooks.
 
-### 6. State placement
+### 7. State placement
 
 Map each state item to its owner.
 
-### 7. Data flow
+### 8. Data flow
 
 Describe server fetch, query prefetch, hydration, client hook consumption, invalidation, and refresh behavior.
 
-### 8. File structure
+### 9. File structure
 
 Show only files that should exist for the assignment.
 For Next.js App Router, include thin `app/` route shells and real page components under `views/`.
 
-### 9. Risks
+### 10. Risks
 
 Identify stale data, serialization, over-clientification, and cache freshness risks.
 
-### 10. Final recommendation
+### 11. Final recommendation
 
 Give the final architecture decision in a short implementation-ready summary.

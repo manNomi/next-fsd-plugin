@@ -30,10 +30,13 @@ Frontend work should optimize for long-lived code, cross-platform web technology
 - Do not mark an entire page as `"use client"` unless unavoidable.
 - Fetch initial/cacheable data in Server Components.
 - In App Router, keep `app/` route files as routing shells. Real page components should live in the FSD pages layer, implemented as `views/` by default.
-- Use `revalidate`, ISR, or fetch cache options for cacheable data.
-- Use `no-store` only when data is request-specific or must always be fresh.
+- For public pages or data that changes infrequently, prefer static rendering, Server Components, and cacheable fetches before client fetching.
+- Use `fetch(..., { cache: "force-cache" })`, `next: { revalidate }`, ISR, or route-level `revalidate` for shared cacheable data.
+- Use `next.tags` with `revalidateTag`, `revalidatePath`, or Server Action `updateTag` when mutation should refresh cached data.
+- If the project explicitly uses Next Cache Components, decide whether `use cache`, `cacheLife`, and `cacheTag` are appropriate before falling back to older fetch-cache patterns.
+- Use `no-store` only when data is request-specific, permission-specific, payment/order-progress specific, or must always be fresh.
 - Use React Query only for client-side server state that needs refetching, mutation, optimistic update, invalidation, or interaction-driven refresh.
-- When React Query is useful, prefer server prefetch plus `HydrationBoundary` so client components can call hooks where data is needed without duplicating fetch logic.
+- React Query hydration is not a replacement for Next server cache. Use it when server-prefetched data should be reusable from client widgets through hooks, and align `staleTime` with the server cache freshness.
 - Keep Client Component boundaries small.
 - Pass only necessary serialized props from Server Components to Client Components.
 

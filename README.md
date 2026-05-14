@@ -68,6 +68,8 @@ $toss-place-fe-superpowers:component-boundary-planner
 $toss-place-fe-superpowers:reliability-first-planner
 $toss-place-fe-superpowers:planning-feedback-loop
 $toss-place-fe-superpowers:react-best-practices
+$toss-place-fe-superpowers:test-quality-reviewer
+$toss-place-fe-superpowers:readme-rationale-writer
 $toss-place-fe-superpowers:parallel-assignment-runner
 $toss-place-fe-superpowers:review-fix-loop
 $toss-place-fe-superpowers:toss-fe-code-review
@@ -102,6 +104,20 @@ For a React/Next.js performance review:
 ```text
 $toss-place-fe-superpowers:react-best-practices
 Review this Next.js assignment with react-best-practices and prioritize waterfalls, bundle size, RSC boundaries, cache strategy, and re-render risks.
+```
+
+For test quality review:
+
+```text
+$toss-place-fe-superpowers:test-quality-reviewer
+Review these tests for low-value copy checks, bug-locking expectations, missing regression coverage, pure logic coverage, and accessibility states.
+```
+
+For README rationale writing:
+
+```text
+$toss-place-fe-superpowers:readme-rationale-writer
+Draft README rationale sections for Design Rationale, API / Cache Strategy, React Query Trade-off, FSD Boundary, Error Handling Strategy, Test Strategy, Known Limitations, and Verification Evidence.
 ```
 
 For verified git delivery:

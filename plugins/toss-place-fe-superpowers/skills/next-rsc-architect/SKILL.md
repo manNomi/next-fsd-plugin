@@ -14,6 +14,18 @@ Use this when the assignment uses Next.js App Router or when Next.js is being co
 - State as low as possible.
 - Cache what can be cached.
 - Do not turn an entire page into `"use client"` unless unavoidable.
+- In App Router, `app/` route files are thin shells. Put real page components in `views/`.
+- When client widgets benefit from server-prefetched server state, prefer React Query hydration over prop-drilling large data through the whole tree.
+
+Preferred route shell:
+
+```tsx
+import { HomePage } from "@/views/home/HomePage";
+
+export default function Page() {
+  return <HomePage />;
+}
+```
 
 ## Decision checklist
 
@@ -27,6 +39,8 @@ Use this when the assignment uses Next.js App Router or when Next.js is being co
 8. Can the Client Component boundary be smaller?
 9. Is React Query actually needed?
 10. What can remain as pure Server Component UI?
+11. Should server-prefetched data be hydrated into React Query for child widgets?
+12. Which `views/` component owns the page-level `HydrationBoundary`?
 
 ## React Query use cases
 
@@ -39,6 +53,7 @@ Use React Query for:
 - polling
 - client-side filters that require server calls
 - stale client-visible server state
+- server-prefetched data that many client widgets should access through hooks after hydration
 
 Do not use React Query for:
 
@@ -47,15 +62,54 @@ Do not use React Query for:
 - data already fetched by Server Components without client-side updates
 - local UI state
 
+## Hydration strategy
+
+Use hydration when:
+
+- initial data can be fetched on the server
+- interactive client widgets need the same data through hooks
+- multiple components need access without prop drilling
+- the data may later be refetched, invalidated, filtered, or mutated on the client
+
+Preferred flow:
+
+1. Define a pure API function in `entities/`.
+2. Define query keys and query options in `entities/`.
+3. In a server `views/*Page` component, create a query client and `prefetchQuery`.
+4. Wrap client sections with `HydrationBoundary`.
+5. In client widgets, call entity hooks that reuse the same query options.
+
+Keep Next.js fetch cache decisions inside the pure API function or server caller. Keep React Query stale time aligned with the expected freshness of hydrated data.
+
 ## Concrete examples
 
-Server-first page:
+Route shell plus view:
 
 ```tsx
-export default async function ProductsPage() {
-  const products = await getProducts({ next: { revalidate: 60 } });
+import { ProductsPage } from "@/views/products/ProductsPage";
 
-  return <ProductList products={products} />;
+export default function Page() {
+  return <ProductsPage />;
+}
+```
+
+Hydrated page view:
+
+```tsx
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { productsOptions } from "@/entities/product/api/productsOptions";
+import { ProductListWidget } from "@/widgets/product-list/ProductListWidget";
+
+export async function ProductsPage() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(productsOptions.list());
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ProductListWidget />
+    </HydrationBoundary>
+  );
 }
 ```
 
@@ -90,7 +144,7 @@ Specify `revalidate`, fetch cache, ISR, or `no-store` decisions.
 
 ### 5. React Query usage
 
-Say exactly where React Query is useful, or state that it should not be added.
+Say exactly where React Query is useful, whether hydration is recommended, where query options live, and which client widgets consume hooks.
 
 ### 6. State placement
 
@@ -98,11 +152,12 @@ Map each state item to its owner.
 
 ### 7. Data flow
 
-Describe server fetch, prop passing, client updates, invalidation, and refresh behavior.
+Describe server fetch, query prefetch, hydration, client hook consumption, invalidation, and refresh behavior.
 
 ### 8. File structure
 
 Show only files that should exist for the assignment.
+For Next.js App Router, include thin `app/` route shells and real page components under `views/`.
 
 ### 9. Risks
 

@@ -17,6 +17,8 @@ This skill is for planning first. It does not implement the plan unless the user
 - Do not ask vague questions like "어떻게 할까요?"
 - Propose a concrete default direction, state assumptions, and ask for focused feedback.
 - A plan is not complete unless it includes goal, scope, execution order, assumptions, risks, trade-offs, feedback points, and validation.
+- For UI assignments, ask for all page screenshots and design/Figma references during planning when available.
+- Include a design comparison routine before implementation: page inventory, screenshot inventory, Figma/design matching, and setup implications.
 - If the plan changes during implementation, pause and update the plan before continuing.
 - If the user says "그냥 진행해", proceed from the best current plan.
 
@@ -237,6 +239,7 @@ For frontend, backend, or full-stack plans, include:
 - test strategy
 - error handling
 - maintainability
+- page screenshot and Figma/design comparison plan
 
 For React/Next.js plans, check:
 
@@ -244,16 +247,41 @@ For React/Next.js plans, check:
 - Is the reason for each Client Component explicit?
 - Can state move lower in the tree?
 - Can ISR, fetch cache, or server-side fetching be used?
+- Can React Query hydration let client widgets call hooks where data is needed?
+- Is `app/` only a folder-routing shell that imports the real page from `views/`?
 - Can pure API functions and query hooks be separated?
 - Are component responsibilities clear?
 - Is there unnecessary re-render risk?
 
+For the preferred Simple FSD structure, plan this default:
+
+```tsx
+import { HomePage } from "@/views/home/HomePage";
+
+export default function Page() {
+  return <HomePage />;
+}
+```
+
+`app/` owns folder routing only. Real page composition belongs in `views/` by default.
+
 For API plans, check:
 
 - Are pure call functions separated from query/mutation hooks?
+- Are query option factories reusable by `prefetchQuery`, hydration, and hooks?
 - Can the structure fit `entities/{domain}/api` or a simpler equivalent?
 - Are error types and response types clear enough?
 - Are server state and client state kept separate?
+
+## Design setup routine
+
+For frontend assignments with visual requirements, add this planning step:
+
+1. Ask for all page screenshots, design exports, or Figma links before implementation.
+2. Build a page inventory: route, viewport, primary states, empty/error/loading states.
+3. Compare each page against the design: layout, spacing, typography, colors, interactions, responsive behavior.
+4. Turn differences into setup decisions: styling system, tokens, shared UI primitives, layout constraints, image assets, and manual QA screenshots.
+5. Include screenshot/design comparison in the validation plan.
 
 ## Quality checklist
 

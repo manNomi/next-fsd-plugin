@@ -179,12 +179,16 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 
 - Server Component by default.
 - Client Component only when necessary.
+- Keep `app/` as folder routing and delegate real page composition to `views/`.
 - Keep state as low as possible.
 - Cache what can be cached.
+- Prefer React Query hydration when server-prefetched data should be consumed by client widgets through hooks.
 - Separate pure API functions from React Query hooks.
+- Keep query option factories reusable across `prefetchQuery`, hydration, and hooks.
 - Use Simple FSD without over-engineering.
 - Split component boundaries based on state ownership and re-rendering.
 - Plan non-trivial work before implementation and ask for focused feedback.
+- Ask for all page screenshots and Figma/design references before large UI implementation.
 - Use Codex subagents only when parallel/delegated work is explicitly requested.
 - Give each worker a disjoint write scope.
 - Run review-fix loops until stop conditions are met or risks are reported.

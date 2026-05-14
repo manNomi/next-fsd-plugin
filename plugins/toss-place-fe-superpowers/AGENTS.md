@@ -14,6 +14,7 @@ You are helping me complete frontend assignments and build production-quality Re
 - Use Client Components only for interactivity, browser APIs, local state, effects, or React Query hooks.
 - Cache data when it can be cached.
 - Separate pure API functions from React Query hooks.
+- Prefer React Query hydration when it makes server-prefetched data reusable from client widgets.
 - Keep domain logic out of JSX when it grows.
 - Avoid unnecessary dependencies.
 - Prioritize reliability, maintainability, and clear trade-offs.
@@ -28,26 +29,42 @@ Frontend work should optimize for long-lived code, cross-platform web technology
 
 - Do not mark an entire page as `"use client"` unless unavoidable.
 - Fetch initial/cacheable data in Server Components.
+- In App Router, keep `app/` route files as routing shells. Real page components should live in the FSD pages layer, implemented as `views/` by default.
 - Use `revalidate`, ISR, or fetch cache options for cacheable data.
 - Use `no-store` only when data is request-specific or must always be fresh.
 - Use React Query only for client-side server state that needs refetching, mutation, optimistic update, invalidation, or interaction-driven refresh.
+- When React Query is useful, prefer server prefetch plus `HydrationBoundary` so client components can call hooks where data is needed without duplicating fetch logic.
 - Keep Client Component boundaries small.
 - Pass only necessary serialized props from Server Components to Client Components.
+
+Preferred route shell:
+
+```tsx
+import { HomePage } from "@/views/home/HomePage";
+
+export default function Page() {
+  return <HomePage />;
+}
+```
 
 ## Simple FSD rules
 
 Use this structure by default:
 
 `app/`
-- Next.js routing
+- Next.js folder routing only
+- route shell files that import views
 - layout
 - providers
 - global setup
 
-`pages/` or `views/`
+`views/`
 - page-level composition
 - route-level screens
 - connecting widgets
+- React Query hydration boundaries for page-level prefetched data when useful
+
+Use `views/` by default for the FSD pages layer in Next.js App Router projects. Use `pages/` only if the project already chose that name and it does not conflict with Next's Pages Router.
 
 `widgets/`
 - meaningful page sections or feature blocks
@@ -57,6 +74,7 @@ Use this structure by default:
 - domain types
 - API functions
 - React Query hooks
+- React Query query option factories
 - query keys
 - mappers
 - domain business rules
@@ -74,6 +92,7 @@ Important:
 - Do not create folders only for architecture purity.
 - Do not add a `features/` layer by default.
 - Add `features/` only if multiple reusable user actions with independent business flows appear.
+- Do not put real page composition in `app/page.tsx`; delegate to `views/{route}/{RoutePage}.tsx`.
 
 ## API layer rules
 
@@ -84,6 +103,7 @@ Preferred structure:
 ```text
 entities/{domain}/{resource}/api/getResource.ts
 entities/{domain}/{resource}/api/useGetResource.ts
+entities/{domain}/{resource}/api/options.ts
 entities/{domain}/{resource}/api/keys.ts
 entities/{domain}/{resource}/model/types.ts
 entities/{domain}/{resource}/lib/mapper.ts
@@ -94,6 +114,7 @@ Example:
 ```text
 entities/bank/stock/api/getStock.ts
 entities/bank/stock/api/useGetStock.ts
+entities/bank/stock/api/stockOptions.ts
 entities/bank/stock/api/keys.ts
 entities/bank/stock/model/types.ts
 ```
@@ -104,7 +125,8 @@ Rules:
 - Pure API functions can be used by Server Components.
 - Pure API functions can be reused by React Query hooks.
 - React Query hooks must live in client-only files.
-- React Query hooks should wrap pure API functions.
+- React Query hooks should wrap shared query options or pure API functions.
+- Query options should be reusable by `prefetchQuery`, `useQuery`, and hydration.
 - Query keys should be centralized.
 - Domain response mapping should not be hidden inside UI components.
 
@@ -134,6 +156,7 @@ Rules:
 For Toss Place style assignments, prioritize:
 
 - requirement completeness
+- screenshot and Figma/design comparison before implementation
 - reliability
 - edge cases
 - offline/store-like failure scenarios

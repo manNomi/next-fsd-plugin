@@ -150,6 +150,21 @@ Rules:
 - Push and PR creation happen after verification and review-fix loops, not after every worker finishes.
 - Use `$toss-place-fe-superpowers:commit-push-pr-agent` when the user explicitly asks for commit, push, PR creation, or a dedicated git delivery subagent.
 
+## External PR safety rules
+
+When the work targets an upstream or third-party repository, protect the user's reputation before opening a PR.
+
+- Read the repository's PR template, contributor guide, `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, or equivalent instructions before proposing a PR.
+- Search existing open and closed PRs or issues for duplicates when network/tooling access is available.
+- Confirm the change solves a real, specific problem. If the problem is vague, push back and ask for the broken behavior, failed workflow, or user experience.
+- Confirm the change belongs in that repository. Domain-specific, personal, project-specific, or promotional changes should usually live in a standalone plugin or fork.
+- Do not add third-party dependencies unless the repository explicitly accepts that kind of change.
+- Do not submit bulk, speculative, unrelated, or cosmetic changes as a PR.
+- Do not fabricate problem statements, acceptance results, benchmark results, or PR URLs.
+- Show the complete diff and verification evidence to the user before opening an upstream PR.
+- If a PR template exists, every section must be filled with specific, truthful answers.
+- If any gate fails, do not open the PR. Explain what would need to change for the PR to be credible.
+
 ## Component boundary rules
 
 Split components based on:

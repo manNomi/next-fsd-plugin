@@ -127,4 +127,11 @@ $toss-place-fe-superpowers:commit-push-pr-agent
 Use commit-push-pr-agent to create feature-sized commits, push the branch, and open a PR after verification.
 ```
 
+For upstream or third-party PR safety:
+
+```text
+$toss-place-fe-superpowers:commit-push-pr-agent
+Before opening this upstream PR, read the PR template, search existing PRs/issues, verify the problem is real, confirm the change belongs in core, and show me the complete diff and PR body.
+```
+
 See `plugins/toss-place-fe-superpowers/README.md` for the full workflow.

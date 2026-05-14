@@ -25,6 +25,7 @@ This plugin prevents jumping directly into code and instead enforces:
 - feature-sized commits
 - optional parallel subagent orchestration
 - optional git delivery subagent for commit/push/PR
+- upstream PR safety checks
 - final submission polish
 
 ## When to use
@@ -46,6 +47,7 @@ Use this plugin when:
 - repeating review, fix, and verification loops after implementation
 - committing verified work in feature-sized slices
 - pushing a branch or opening a PR after verification
+- opening a PR against an upstream or third-party repository without embarrassing yourself with a vague, duplicate, or template-breaking PR
 
 ## Skill workflow
 
@@ -103,6 +105,18 @@ Use this when you explicitly want Codex to coordinate multiple agents, parallel 
 
 The parallel runner uses Codex subagents only when you explicitly ask for parallel agents, multiple agents, an agent team, delegated work, or a review loop. It keeps the main thread responsible for critical-path decisions, integration, verification, and final reporting.
 
+### Upstream PR safety workflow
+
+Use this when work must be pushed or proposed to a repository you do not fully control:
+
+1. `$toss-place-fe-superpowers:commit-push-pr-agent`
+2. Read the repository PR template and contributor/agent instructions.
+3. Search existing open and closed PRs or issues for duplicates when tooling is available.
+4. Confirm the change solves a real, specific problem and belongs in that repository.
+5. Show the complete diff, verification evidence, and intended PR body before PR creation.
+
+If any check fails, the git delivery agent should stop before opening a PR and report the blocker. A domain-specific or project-specific change should usually become a standalone plugin, fork change, or private workflow instead of an upstream core PR.
+
 ## Example prompts
 
 ### `$toss-place-fe-superpowers:planning-feedback-loop`
@@ -149,6 +163,11 @@ Use commit-push-pr-agent to create feature-sized commits, push the branch, and o
 
 ```text
 검증이 끝난 변경분을 기능 단위로 커밋하고 push/PR까지 전담 subagent로 처리해줘.
+```
+
+```text
+$toss-place-fe-superpowers:commit-push-pr-agent
+Before opening this upstream PR, read the PR template, search existing PRs/issues, verify the problem is real, confirm the change belongs in core, and show me the complete diff and PR body.
 ```
 
 ### `$toss-place-fe-superpowers:assignment-forensics`
@@ -277,6 +296,7 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Run review-fix loops until stop conditions are met or risks are reported.
 - Commit verified work in feature-sized slices when git delivery is requested.
 - Use a git delivery subagent for commit, push, and PR only after verification.
+- For upstream or third-party PRs, read contributor instructions, search duplicates, verify a real problem, confirm repository fit, and get user approval on the complete diff before opening the PR.
 - Prioritize reliability, maintainability, and clear trade-offs.
 - Prefer small, reviewer-readable architecture over impressive abstractions.
 
@@ -291,3 +311,4 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Parallel work can increase token and time cost.
 - If worker write scopes overlap, the main thread must stop and coordinate before continuing.
 - Feature-sized commits depend on a clean diff and clear slice boundaries.
+- Upstream PR safety checks depend on available repository instructions, GitHub search access, and honest problem evidence.

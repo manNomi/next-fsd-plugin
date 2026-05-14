@@ -32,77 +32,89 @@ Use this plugin when:
 
 Recommended order:
 
-1. `$assignment-forensics`
-2. `$stack-setup-planner`
-3. `$next-rsc-architect`
-4. `$simple-fsd-architect`
-5. `$api-layer-designer`
-6. `$component-boundary-planner`
-7. `$reliability-first-planner`
-8. `$toss-fe-code-review`
-9. `$offline-edge-case-checker`
-10. `$final-submit-polisher`
+1. `$toss-place-fe-superpowers:assignment-forensics`
+2. `$toss-place-fe-superpowers:stack-setup-planner`
+3. `$toss-place-fe-superpowers:next-rsc-architect`
+4. `$toss-place-fe-superpowers:simple-fsd-architect`
+5. `$toss-place-fe-superpowers:api-layer-designer`
+6. `$toss-place-fe-superpowers:component-boundary-planner`
+7. `$toss-place-fe-superpowers:reliability-first-planner`
+8. `$toss-place-fe-superpowers:toss-fe-code-review`
+9. `$toss-place-fe-superpowers:offline-edge-case-checker`
+10. `$toss-place-fe-superpowers:final-submit-polisher`
+
+When this plugin is installed through a Codex marketplace, use the namespaced skill names above.
 
 ## Example prompts
 
-### `$assignment-forensics`
+### `$toss-place-fe-superpowers:assignment-forensics`
 
 ```text
-Use assignment-forensics on this take-home assignment. Extract the MVP, hidden evaluation points, Toss Place reliability risks, and submission checklist.
+$toss-place-fe-superpowers:assignment-forensics
+Analyze this take-home assignment. Extract the MVP, hidden evaluation points, Toss Place reliability risks, and submission checklist.
 ```
 
-### `$stack-setup-planner`
+### `$toss-place-fe-superpowers:stack-setup-planner`
 
 ```text
-Use stack-setup-planner to decide whether this assignment should use Vite or Next.js, Tailwind or Emotion, React Query or plain fetch, and which test setup is enough.
+$toss-place-fe-superpowers:stack-setup-planner
+Decide whether this assignment should use Vite or Next.js, Tailwind or Emotion, React Query or plain fetch, and which test setup is enough.
 ```
 
-### `$next-rsc-architect`
+### `$toss-place-fe-superpowers:next-rsc-architect`
 
 ```text
-Use next-rsc-architect for this Next.js App Router assignment. Decide what stays server-side, what needs client boundaries, and how caching should work.
+$toss-place-fe-superpowers:next-rsc-architect
+For this Next.js App Router assignment, decide what stays server-side, what needs client boundaries, and how caching should work.
 ```
 
-### `$simple-fsd-architect`
+### `$toss-place-fe-superpowers:simple-fsd-architect`
 
 ```text
-Use simple-fsd-architect to design a lightweight folder structure for this assignment without creating architecture-only folders.
+$toss-place-fe-superpowers:simple-fsd-architect
+Design a lightweight folder structure for this assignment without creating architecture-only folders.
 ```
 
-### `$api-layer-designer`
+### `$toss-place-fe-superpowers:api-layer-designer`
 
 ```text
-Use api-layer-designer to separate pure API functions, React Query hooks, query keys, types, and mappers for this assignment.
+$toss-place-fe-superpowers:api-layer-designer
+Separate pure API functions, React Query hooks, query keys, types, and mappers for this assignment.
 ```
 
-### `$component-boundary-planner`
+### `$toss-place-fe-superpowers:component-boundary-planner`
 
 ```text
-Use component-boundary-planner to split components by state ownership, Server/Client boundaries, and re-render risk.
+$toss-place-fe-superpowers:component-boundary-planner
+Split components by state ownership, Server/Client boundaries, and re-render risk.
 ```
 
-### `$reliability-first-planner`
+### `$toss-place-fe-superpowers:reliability-first-planner`
 
 ```text
-Use reliability-first-planner to create an implementation plan that covers loading, error, empty, disabled, pending, retry, and duplicate action prevention.
+$toss-place-fe-superpowers:reliability-first-planner
+Create an implementation plan that covers loading, error, empty, disabled, pending, retry, and duplicate action prevention.
 ```
 
-### `$toss-fe-code-review`
+### `$toss-place-fe-superpowers:toss-fe-code-review`
 
 ```text
-Use toss-fe-code-review on this diff and prioritize requirement gaps, reliability risks, state boundaries, API layer issues, and README weaknesses.
+$toss-place-fe-superpowers:toss-fe-code-review
+Review this diff and prioritize requirement gaps, reliability risks, state boundaries, API layer issues, and README weaknesses.
 ```
 
-### `$offline-edge-case-checker`
+### `$toss-place-fe-superpowers:offline-edge-case-checker`
 
 ```text
-Use offline-edge-case-checker to test this assignment against POS, kiosk, table order, payment/order, slow network, duplicate submit, and stale data scenarios.
+$toss-place-fe-superpowers:offline-edge-case-checker
+Test this assignment against POS, kiosk, table order, payment/order, slow network, duplicate submit, and stale data scenarios.
 ```
 
-### `$final-submit-polisher`
+### `$toss-place-fe-superpowers:final-submit-polisher`
 
 ```text
-Use final-submit-polisher before submission. Check README, scripts, verification commands, trade-offs, limitations, final diff quality, and final message.
+$toss-place-fe-superpowers:final-submit-polisher
+Check README, scripts, verification commands, trade-offs, limitations, final diff quality, and final message before submission.
 ```
 
 ## Design principles

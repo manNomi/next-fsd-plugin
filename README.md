@@ -6,20 +6,52 @@ Codex-only marketplace repository for frontend assignment workflow plugins.
 
 - `toss-place-fe-superpowers`: a Codex skill pack for Toss Place style frontend take-home assignments.
 
-## Local Codex Setup
+## Install in Codex
 
-Clone this repository, then add the marketplace to `~/.codex/config.toml`:
+Codex currently reads this marketplace from a local filesystem path. Clone the GitHub repository first:
+
+```bash
+git clone --branch codex/toss-place-fe-superpowers https://github.com/manNomi/next-fsd-plugin.git
+cd next-fsd-plugin
+```
+
+Then add this marketplace to `~/.codex/config.toml`. Replace the `source` value with the absolute path where you cloned this repository:
 
 ```toml
 [marketplaces.next-fsd-plugin]
 source_type = "local"
-source = "/absolute/path/to/next-fsd-plugin"
+source = "/Users/your-name/path/to/next-fsd-plugin"
 
 [plugins."toss-place-fe-superpowers@next-fsd-plugin"]
 enabled = true
 ```
 
-Restart Codex and start a new session.
+Restart Codex completely, then start a new session. The plugin should appear as `Toss Place FE Superpowers`.
+
+To update the plugin later:
+
+```bash
+cd /Users/your-name/path/to/next-fsd-plugin
+git pull
+```
+
+Then restart Codex again.
+
+## Verify Installation
+
+In a new Codex session, try:
+
+```text
+$toss-place-fe-superpowers:assignment-forensics
+```
+
+If Codex says `$assignment-forensics` is not installed, use the namespaced marketplace skill name instead:
+
+```text
+$toss-place-fe-superpowers:assignment-forensics
+```
+
+Marketplace plugin skills are exposed with the plugin namespace.
 
 ## Skill Usage
 

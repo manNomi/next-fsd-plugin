@@ -4,14 +4,14 @@ Codex-only marketplace repository for frontend assignment workflow plugins.
 
 ## Included Plugin
 
-- `toss-place-fe-superpowers`: a Codex skill pack for Toss Place style frontend take-home assignments.
+- `toss-place-fe-superpowers`: a Codex skill pack and subagent orchestration workflow for Toss Place style frontend take-home assignments.
 
 ## Install in Codex
 
 Codex currently reads this marketplace from a local filesystem path. Clone the GitHub repository first:
 
 ```bash
-git clone --branch codex/toss-place-fe-superpowers https://github.com/manNomi/next-fsd-plugin.git
+git clone https://github.com/manNomi/next-fsd-plugin.git
 cd next-fsd-plugin
 ```
 
@@ -65,9 +65,18 @@ $toss-place-fe-superpowers:simple-fsd-architect
 $toss-place-fe-superpowers:api-layer-designer
 $toss-place-fe-superpowers:component-boundary-planner
 $toss-place-fe-superpowers:reliability-first-planner
+$toss-place-fe-superpowers:parallel-assignment-runner
+$toss-place-fe-superpowers:review-fix-loop
 $toss-place-fe-superpowers:toss-fe-code-review
 $toss-place-fe-superpowers:offline-edge-case-checker
 $toss-place-fe-superpowers:final-submit-polisher
+```
+
+For an end-to-end orchestrated assignment run:
+
+```text
+$toss-place-fe-superpowers:parallel-assignment-runner
+Use parallel-assignment-runner to complete this frontend assignment with parallel agents, review-fix loops, verification, and final submission polish.
 ```
 
 See `plugins/toss-place-fe-superpowers/README.md` for the full workflow.

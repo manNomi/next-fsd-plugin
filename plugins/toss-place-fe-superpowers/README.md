@@ -2,7 +2,7 @@
 
 ## What this is
 
-A Codex skill pack for frontend take-home assignments, inspired by Superpowers, customized for Toss Place style frontend work.
+A Codex skill pack for frontend take-home assignments, inspired by Superpowers, customized for Toss Place style frontend work. It can be used skill-by-skill or as a Codex subagent orchestration workflow.
 
 ## Why this exists
 
@@ -15,6 +15,8 @@ This plugin prevents jumping directly into code and instead enforces:
 - API layer separation
 - re-render-aware component boundaries
 - reliability review
+- review-fix loops
+- optional parallel subagent orchestration
 - final submission polish
 
 ## When to use
@@ -27,10 +29,14 @@ Use this plugin when:
 - designing API and React Query layers
 - splitting components
 - reviewing code before submission
+- running an end-to-end assignment workflow with explicitly requested parallel agents
+- repeating review, fix, and verification loops after implementation
 
 ## Skill workflow
 
-Recommended order:
+### Manual skill workflow
+
+Use this when you want to control each step yourself:
 
 1. `$toss-place-fe-superpowers:assignment-forensics`
 2. `$toss-place-fe-superpowers:stack-setup-planner`
@@ -45,7 +51,34 @@ Recommended order:
 
 When this plugin is installed through a Codex marketplace, use the namespaced skill names above.
 
+### End-to-end orchestrator workflow
+
+Use this when you explicitly want Codex to coordinate multiple agents, parallel work slices, review-fix loops, verification, and final polish:
+
+1. `$toss-place-fe-superpowers:parallel-assignment-runner`
+2. `$toss-place-fe-superpowers:review-fix-loop`
+3. `$toss-place-fe-superpowers:final-submit-polisher`
+
+The parallel runner uses Codex subagents only when you explicitly ask for parallel agents, multiple agents, an agent team, delegated work, or a review loop. It keeps the main thread responsible for critical-path decisions, integration, verification, and final reporting.
+
 ## Example prompts
+
+### `$toss-place-fe-superpowers:parallel-assignment-runner`
+
+```text
+Use parallel-assignment-runner to complete this frontend assignment with parallel agents, review-fix loops, verification, and final submission polish.
+```
+
+```text
+parallel-assignment-runner로 이 프론트엔드 과제를 병렬 에이전트, 리뷰-수정 루프, 검증, 최종 제출 polish까지 진행해줘.
+```
+
+### `$toss-place-fe-superpowers:review-fix-loop`
+
+```text
+$toss-place-fe-superpowers:review-fix-loop
+Review the current implementation, fix Critical and requirement/correctness/reliability Important findings, and re-run verification up to 3 times.
+```
 
 ### `$toss-place-fe-superpowers:assignment-forensics`
 
@@ -126,6 +159,9 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Separate pure API functions from React Query hooks.
 - Use Simple FSD without over-engineering.
 - Split component boundaries based on state ownership and re-rendering.
+- Use Codex subagents only when parallel/delegated work is explicitly requested.
+- Give each worker a disjoint write scope.
+- Run review-fix loops until stop conditions are met or risks are reported.
 - Prioritize reliability, maintainability, and clear trade-offs.
 - Prefer small, reviewer-readable architecture over impressive abstractions.
 
@@ -135,3 +171,6 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - This is a workflow guide, not a replacement for engineering judgment.
 - Adapt every recommendation to the actual assignment requirements.
 - The plugin is Codex-first and does not include hooks, MCP servers, assets, or non-Codex platform support.
+- This is not a new agent runtime; it is a Codex subagent orchestration workflow.
+- Parallel work can increase token and time cost.
+- If worker write scopes overlap, the main thread must stop and coordinate before continuing.

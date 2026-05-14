@@ -1,7 +1,7 @@
 {
   "name": "toss-place-fe-superpowers",
   "version": "0.1.0",
-  "description": "A frontend assignment workflow kit for Toss Place style take-home assignments. It helps with requirement analysis, stack selection, Next.js RSC architecture, Simple FSD structure, API layer design, re-render-aware component boundaries, reliability review, and final submission polish.",
+  "description": "A frontend assignment workflow kit for Toss Place style take-home assignments. It helps with requirement analysis, stack selection, Next.js RSC architecture, Simple FSD, API design, component boundaries, parallel agent orchestration, review-fix loops, reliability review, and final polish.",
   "author": {
     "name": "Manwook Han",
     "url": "https://github.com/manNomi"
@@ -20,13 +20,17 @@
     "reliability",
     "toss-place",
     "take-home",
-    "architecture"
+    "architecture",
+    "parallel-agents",
+    "subagents",
+    "orchestration",
+    "review-fix-loop"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Toss Place FE Superpowers",
     "shortDescription": "Frontend take-home workflows for Toss Place style reliability and architecture",
-    "longDescription": "A Codex-first skill pack for frontend take-home assignments, especially Toss Place and offline-commerce-like products. It guides requirement analysis, stack selection, Next.js RSC and caching architecture, Simple FSD structure, API layer design, re-render-aware component boundaries, reliability review, offline edge-case checks, and final submission polish.",
+    "longDescription": "A Codex-first skill pack for frontend take-home assignments, especially Toss Place and offline-commerce-like products. It guides requirement analysis, stack selection, Next.js RSC and caching architecture, Simple FSD structure, API layer design, re-render-aware component boundaries, Codex subagent orchestration, review-fix loops, reliability review, offline edge-case checks, and final submission polish.",
     "developerName": "Manwook Han",
     "category": "Coding",
     "capabilities": [
@@ -35,7 +39,9 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Plan and review a Toss Place style frontend take-home assignment."
+      "Run a frontend assignment with parallel agents.",
+      "Review and fix this assignment until verification passes.",
+      "Polish this Toss Place style submission."
     ],
     "brandColor": "#0064FF",
     "screenshots": []

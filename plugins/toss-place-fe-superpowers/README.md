@@ -16,6 +16,7 @@ This plugin prevents jumping directly into code and instead enforces:
 - re-render-aware component boundaries
 - reliability review
 - review-fix loops
+- planning feedback loops
 - optional parallel subagent orchestration
 - final submission polish
 
@@ -29,6 +30,7 @@ Use this plugin when:
 - designing API and React Query layers
 - splitting components
 - reviewing code before submission
+- planning a non-trivial implementation before coding
 - running an end-to-end assignment workflow with explicitly requested parallel agents
 - repeating review, fix, and verification loops after implementation
 
@@ -38,18 +40,29 @@ Use this plugin when:
 
 Use this when you want to control each step yourself:
 
-1. `$toss-place-fe-superpowers:assignment-forensics`
-2. `$toss-place-fe-superpowers:stack-setup-planner`
-3. `$toss-place-fe-superpowers:next-rsc-architect`
-4. `$toss-place-fe-superpowers:simple-fsd-architect`
-5. `$toss-place-fe-superpowers:api-layer-designer`
-6. `$toss-place-fe-superpowers:component-boundary-planner`
-7. `$toss-place-fe-superpowers:reliability-first-planner`
-8. `$toss-place-fe-superpowers:toss-fe-code-review`
-9. `$toss-place-fe-superpowers:offline-edge-case-checker`
-10. `$toss-place-fe-superpowers:final-submit-polisher`
+1. `$toss-place-fe-superpowers:planning-feedback-loop`
+2. `$toss-place-fe-superpowers:assignment-forensics`
+3. `$toss-place-fe-superpowers:stack-setup-planner`
+4. `$toss-place-fe-superpowers:next-rsc-architect`
+5. `$toss-place-fe-superpowers:simple-fsd-architect`
+6. `$toss-place-fe-superpowers:api-layer-designer`
+7. `$toss-place-fe-superpowers:component-boundary-planner`
+8. `$toss-place-fe-superpowers:reliability-first-planner`
+9. `$toss-place-fe-superpowers:toss-fe-code-review`
+10. `$toss-place-fe-superpowers:offline-edge-case-checker`
+11. `$toss-place-fe-superpowers:final-submit-polisher`
 
 When this plugin is installed through a Codex marketplace, use the namespaced skill names above.
+
+### Planning-first workflow
+
+Use this before implementation when the task is non-trivial and you want to refine the direction with feedback:
+
+1. `$toss-place-fe-superpowers:planning-feedback-loop`
+2. Confirm or revise the plan.
+3. Continue with the manual workflow or the end-to-end orchestrator workflow.
+
+The planning feedback loop restates the goal, drafts a plan, asks for focused feedback, revises the plan, reviews risk and validation, and only then finalizes an executable plan.
 
 ### End-to-end orchestrator workflow
 
@@ -62,6 +75,18 @@ Use this when you explicitly want Codex to coordinate multiple agents, parallel 
 The parallel runner uses Codex subagents only when you explicitly ask for parallel agents, multiple agents, an agent team, delegated work, or a review loop. It keeps the main thread responsible for critical-path decisions, integration, verification, and final reporting.
 
 ## Example prompts
+
+### `$toss-place-fe-superpowers:planning-feedback-loop`
+
+```text
+$toss-place-fe-superpowers:planning-feedback-loop
+이 프론트엔드 과제 구현 전에 목표, 범위, 설계 방향, 리스크, 검증 방법을 피드백 루프로 정리해줘.
+```
+
+```text
+$toss-place-fe-superpowers:planning-feedback-loop
+Before implementation, help me refine the goal, scope, architecture direction, risks, and validation plan through a feedback loop.
+```
 
 ### `$toss-place-fe-superpowers:parallel-assignment-runner`
 
@@ -159,6 +184,7 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Separate pure API functions from React Query hooks.
 - Use Simple FSD without over-engineering.
 - Split component boundaries based on state ownership and re-rendering.
+- Plan non-trivial work before implementation and ask for focused feedback.
 - Use Codex subagents only when parallel/delegated work is explicitly requested.
 - Give each worker a disjoint write scope.
 - Run review-fix loops until stop conditions are met or risks are reported.

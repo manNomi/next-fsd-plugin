@@ -65,6 +65,7 @@ $toss-place-fe-superpowers:simple-fsd-architect
 $toss-place-fe-superpowers:api-layer-designer
 $toss-place-fe-superpowers:component-boundary-planner
 $toss-place-fe-superpowers:reliability-first-planner
+$toss-place-fe-superpowers:planning-feedback-loop
 $toss-place-fe-superpowers:parallel-assignment-runner
 $toss-place-fe-superpowers:review-fix-loop
 $toss-place-fe-superpowers:toss-fe-code-review
@@ -77,6 +78,13 @@ For an end-to-end orchestrated assignment run:
 ```text
 $toss-place-fe-superpowers:parallel-assignment-runner
 Use parallel-assignment-runner to complete this frontend assignment with parallel agents, review-fix loops, verification, and final submission polish.
+```
+
+For a planning-first feedback loop before implementation:
+
+```text
+$toss-place-fe-superpowers:planning-feedback-loop
+이 프론트엔드 과제 구현 전에 목표, 범위, 설계 방향, 리스크, 검증 방법을 피드백 루프로 정리해줘.
 ```
 
 See `plugins/toss-place-fe-superpowers/README.md` for the full workflow.

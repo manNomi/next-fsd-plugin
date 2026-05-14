@@ -1,6 +1,6 @@
 ---
 name: api-layer-designer
-description: Design an API layer that separates pure API call functions, React Query hooks, query keys, domain types, and mappers under the entities layer.
+description: Design a domain API layer that separates pure API call functions, React Query hooks, query keys, API-bound domain types, and mappers under the entities layer while keeping common code in shared.
 ---
 
 # API Layer Designer
@@ -41,7 +41,7 @@ entities/bank/stock/lib/mapStock.ts
 `useGetStock.ts`
 
 - client-only React Query hook
-- wraps shared query options
+- wraps domain query options
 - defines `enabled` condition
 - optionally defines `staleTime`, `retry`, `select`, `placeholderData`
 
@@ -92,6 +92,35 @@ When React Query is useful, design for hydration first:
 
 This maximizes local data access through hooks while keeping server prefetch, cache policy, and domain mapping centralized.
 
+## Entities vs shared boundary
+
+`entities/` is only for API-adjacent domain modules.
+
+Allowed in `entities/`:
+
+- domain-specific pure API functions
+- domain-specific React Query hooks
+- domain-specific query option factories and query keys
+- API response types and domain types directly tied to the API
+- mappers directly tied to that API response
+
+Forbidden in `entities/`:
+
+- common utilities
+- common formatters
+- common fetch clients
+- common query wrappers
+- cross-domain helpers
+- reusable UI
+- global constants or config
+
+Move common code to:
+
+- `shared/util` for generic functions
+- `shared/api` for API clients, fetchers, and common query helpers
+- `shared/ui` for reusable UI
+- `shared/config` or `shared/constants` for global config and constants
+
 ## Next.js cache policy in API functions
 
 For pure API functions that can run in Server Components, make the freshness policy explicit:
@@ -115,6 +144,7 @@ List each domain/resource, endpoint or mock source, request params, and consumer
 
 Choose nested or flatter structure and show exact files.
 Include query option files when React Query or hydration is used.
+State which common files belong in `shared/` instead of `entities/`.
 
 ### 3. Pure API functions
 
@@ -144,6 +174,7 @@ Show which hooks are used from Client Components and why.
 ### 9. What not to abstract
 
 List wrappers, clients, mappers, hooks, or generics that are not needed yet.
+Explicitly list any common utilities, fetchers, query helpers, constants, or UI that must not be placed in `entities/`.
 
 ### 10. Example code skeleton
 

@@ -59,6 +59,7 @@ Use the plugin skills with the marketplace namespace:
 
 ```text
 $toss-place-fe-superpowers:assignment-forensics
+$toss-place-fe-superpowers:product-assignment-strategist
 $toss-place-fe-superpowers:stack-setup-planner
 $toss-place-fe-superpowers:next-rsc-architect
 $toss-place-fe-superpowers:simple-fsd-architect
@@ -72,6 +73,7 @@ $toss-place-fe-superpowers:review-fix-loop
 $toss-place-fe-superpowers:toss-fe-code-review
 $toss-place-fe-superpowers:offline-edge-case-checker
 $toss-place-fe-superpowers:final-submit-polisher
+$toss-place-fe-superpowers:commit-push-pr-agent
 ```
 
 For an end-to-end orchestrated assignment run:
@@ -88,11 +90,25 @@ $toss-place-fe-superpowers:planning-feedback-loop
 이 프론트엔드 과제 구현 전에 목표, 범위, 설계 방향, 리스크, 검증 방법을 피드백 루프로 정리해줘.
 ```
 
+For product-focused assignment strategy:
+
+```text
+$toss-place-fe-superpowers:product-assignment-strategist
+이 제품 중심 프론트엔드 과제를 기존 코드베이스 적응, 가정, 트레이드오프, README 제출 전략까지 포함해서 분석해줘.
+```
+
 For a React/Next.js performance review:
 
 ```text
 $toss-place-fe-superpowers:react-best-practices
 Review this Next.js assignment with react-best-practices and prioritize waterfalls, bundle size, RSC boundaries, cache strategy, and re-render risks.
+```
+
+For verified git delivery:
+
+```text
+$toss-place-fe-superpowers:commit-push-pr-agent
+Use commit-push-pr-agent to create feature-sized commits, push the branch, and open a PR after verification.
 ```
 
 See `plugins/toss-place-fe-superpowers/README.md` for the full workflow.

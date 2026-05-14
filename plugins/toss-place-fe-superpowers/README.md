@@ -9,6 +9,8 @@ A Codex skill pack for frontend take-home assignments, inspired by Superpowers, 
 This plugin prevents jumping directly into code and instead enforces:
 
 - requirement analysis
+- product-focused assignment strategy
+- assumptions and trade-off planning
 - stack selection
 - Next.js RSC/caching decisions
 - Simple FSD architecture
@@ -18,7 +20,9 @@ This plugin prevents jumping directly into code and instead enforces:
 - reliability review
 - review-fix loops
 - planning feedback loops
+- feature-sized commits
 - optional parallel subagent orchestration
+- optional git delivery subagent for commit/push/PR
 - final submission polish
 
 ## When to use
@@ -36,6 +40,8 @@ Use this plugin when:
 - planning a non-trivial implementation before coding
 - running an end-to-end assignment workflow with explicitly requested parallel agents
 - repeating review, fix, and verification loops after implementation
+- committing verified work in feature-sized slices
+- pushing a branch or opening a PR after verification
 
 ## Skill workflow
 
@@ -44,17 +50,19 @@ Use this plugin when:
 Use this when you want to control each step yourself:
 
 1. `$toss-place-fe-superpowers:planning-feedback-loop`
-2. `$toss-place-fe-superpowers:assignment-forensics`
-3. `$toss-place-fe-superpowers:stack-setup-planner`
-4. `$toss-place-fe-superpowers:next-rsc-architect`
-5. `$toss-place-fe-superpowers:simple-fsd-architect`
-6. `$toss-place-fe-superpowers:api-layer-designer`
-7. `$toss-place-fe-superpowers:component-boundary-planner`
-8. `$toss-place-fe-superpowers:reliability-first-planner`
-9. `$toss-place-fe-superpowers:react-best-practices`
-10. `$toss-place-fe-superpowers:toss-fe-code-review`
-11. `$toss-place-fe-superpowers:offline-edge-case-checker`
-12. `$toss-place-fe-superpowers:final-submit-polisher`
+2. `$toss-place-fe-superpowers:product-assignment-strategist`
+3. `$toss-place-fe-superpowers:assignment-forensics`
+4. `$toss-place-fe-superpowers:stack-setup-planner`
+5. `$toss-place-fe-superpowers:next-rsc-architect`
+6. `$toss-place-fe-superpowers:simple-fsd-architect`
+7. `$toss-place-fe-superpowers:api-layer-designer`
+8. `$toss-place-fe-superpowers:component-boundary-planner`
+9. `$toss-place-fe-superpowers:reliability-first-planner`
+10. `$toss-place-fe-superpowers:react-best-practices`
+11. `$toss-place-fe-superpowers:toss-fe-code-review`
+12. `$toss-place-fe-superpowers:offline-edge-case-checker`
+13. `$toss-place-fe-superpowers:final-submit-polisher`
+14. `$toss-place-fe-superpowers:commit-push-pr-agent`
 
 When this plugin is installed through a Codex marketplace, use the namespaced skill names above.
 
@@ -68,6 +76,16 @@ Use this before implementation when the task is non-trivial and you want to refi
 
 The planning feedback loop restates the goal, drafts a plan, asks for focused feedback, revises the plan, reviews risk and validation, and only then finalizes an executable plan.
 
+### Product-focused assignment workflow
+
+Use this when the assignment may evaluate existing codebase adaptation, product judgment, assumptions, trade-offs, reviewer-readable code, README quality, or AI usage verification:
+
+1. `$toss-place-fe-superpowers:planning-feedback-loop`
+2. `$toss-place-fe-superpowers:product-assignment-strategist`
+3. `$toss-place-fe-superpowers:assignment-forensics`
+
+The product assignment strategist treats Toss-style context as likely evaluation context, not official fact. It forces assumptions, trade-offs, existing codebase inspection, and README strategy before implementation.
+
 ### End-to-end orchestrator workflow
 
 Use this when you explicitly want Codex to coordinate multiple agents, parallel work slices, review-fix loops, verification, and final polish:
@@ -75,6 +93,7 @@ Use this when you explicitly want Codex to coordinate multiple agents, parallel 
 1. `$toss-place-fe-superpowers:parallel-assignment-runner`
 2. `$toss-place-fe-superpowers:review-fix-loop`
 3. `$toss-place-fe-superpowers:final-submit-polisher`
+4. `$toss-place-fe-superpowers:commit-push-pr-agent` when commit, push, or PR delivery is explicitly requested
 
 The parallel runner uses Codex subagents only when you explicitly ask for parallel agents, multiple agents, an agent team, delegated work, or a review loop. It keeps the main thread responsible for critical-path decisions, integration, verification, and final reporting.
 
@@ -107,6 +126,23 @@ parallel-assignment-runner로 이 프론트엔드 과제를 병렬 에이전트,
 ```text
 $toss-place-fe-superpowers:review-fix-loop
 Review the current implementation, fix Critical and requirement/correctness/reliability Important findings, and re-run verification up to 3 times.
+```
+
+### `$toss-place-fe-superpowers:product-assignment-strategist`
+
+```text
+$toss-place-fe-superpowers:product-assignment-strategist
+이 제품 중심 프론트엔드 과제를 기존 코드베이스 적응, 가정, 트레이드오프, README 제출 전략까지 포함해서 분석해줘.
+```
+
+### `$toss-place-fe-superpowers:commit-push-pr-agent`
+
+```text
+Use commit-push-pr-agent to create feature-sized commits, push the branch, and open a PR after verification.
+```
+
+```text
+검증이 끝난 변경분을 기능 단위로 커밋하고 push/PR까지 전담 subagent로 처리해줘.
 ```
 
 ### `$toss-place-fe-superpowers:assignment-forensics`
@@ -206,12 +242,19 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Separate pure API functions from React Query hooks.
 - Keep query option factories reusable across `prefetchQuery`, hydration, and hooks.
 - Use Simple FSD without over-engineering.
+- Keep `entities/` limited to domain API functions, query options/hooks, API-bound types, and API response mappers.
+- Put common utilities, fetchers, query helpers, UI, config, and constants in `shared/`.
 - Split component boundaries based on state ownership and re-rendering.
 - Plan non-trivial work before implementation and ask for focused feedback.
+- Treat Toss-style assignment context as inference, not official fact.
+- Record unclear requirements as assumptions and ask for feedback before implementation.
+- Document assumptions, trade-offs, exception handling, AI usage, and verification in README.
 - Ask for all page screenshots and Figma/design references before large UI implementation.
 - Use Codex subagents only when parallel/delegated work is explicitly requested.
 - Give each worker a disjoint write scope.
 - Run review-fix loops until stop conditions are met or risks are reported.
+- Commit verified work in feature-sized slices when git delivery is requested.
+- Use a git delivery subagent for commit, push, and PR only after verification.
 - Prioritize reliability, maintainability, and clear trade-offs.
 - Prefer small, reviewer-readable architecture over impressive abstractions.
 
@@ -222,5 +265,7 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Adapt every recommendation to the actual assignment requirements.
 - The plugin is Codex-first and does not include hooks, MCP servers, assets, or non-Codex platform support.
 - This is not a new agent runtime; it is a Codex subagent orchestration workflow.
+- The git delivery agent is a skill workflow, not a new git runtime.
 - Parallel work can increase token and time cost.
 - If worker write scopes overlap, the main thread must stop and coordinate before continuing.
+- Feature-sized commits depend on a clean diff and clear slice boundaries.

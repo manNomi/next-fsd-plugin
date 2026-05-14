@@ -46,22 +46,23 @@ Use `views/` as the default name for the FSD pages layer in Next.js App Router p
 
 `entities/`
 
-- domain types
-- pure API functions
-- React Query hooks
-- query keys
-- mappers
-- business rules
+- domain API modules only
+- domain-specific pure API functions
+- domain-specific React Query hooks
+- domain-specific query option factories and query keys
+- API response types and domain types directly tied to that API
+- mappers directly tied to that API response
 - examples: `order`, `product`, `payment`, `store`, `customer`
 
 `shared/`
 
 - shared UI primitives
-- utilities
+- common utilities
 - common hooks
-- base API client
-- formatters
-- constants
+- common API client and fetchers
+- common query helpers
+- common formatters
+- constants and config
 
 ## Rules
 
@@ -73,12 +74,18 @@ Use `views/` as the default name for the FSD pages layer in Next.js App Router p
 - Do not put real page composition, data orchestration, or widget wiring in `app/page.tsx`; keep it in `views/{route}/{RoutePage}.tsx`.
 - Let `app/` own only route folders, metadata/layout when needed, and thin `Page` exports.
 - Plan React Query hydration at the `views/` boundary when many child widgets need the same server-prefetched domain data.
+- Never put common code in `entities/`.
+- Move generic utilities to `shared/util`.
+- Move common API clients and fetchers to `shared/api`.
+- Move common query helpers to `shared/api` or `shared/lib` depending on the project convention.
+- Move shared UI to `shared/ui`.
+- Move common config and constants to `shared/config` or `shared/constants`.
 
 ## Hydration-aware structure
 
 When React Query is useful, prefer this flow:
 
-1. Pure API functions and query options live in `entities/`.
+1. Domain-specific pure API functions and query options live in `entities/`.
 2. A server component in `views/` creates a query client and prefetches important queries.
 3. `HydrationBoundary` wraps the view section that needs client-side hooks.
 4. Client widgets call entity hooks where the data is needed.
@@ -106,11 +113,12 @@ List widgets that represent meaningful product sections.
 
 ### 5. Entities layer responsibilities
 
-Map each domain to types, pure API functions, query option factories, hooks, query keys, mappers, and rules.
+Map each domain to API-specific types, pure API functions, query option factories, hooks, query keys, and API response mappers.
+Explicitly reject common utilities, common fetchers, common mappers, shared query helpers, shared UI, and global constants from `entities/`.
 
 ### 6. Shared layer responsibilities
 
-List shared UI, utilities, API client, constants, and config.
+List shared UI, common utilities, API client/fetchers, common query helpers, formatters, constants, and config.
 
 ### 7. What should stay page-local
 

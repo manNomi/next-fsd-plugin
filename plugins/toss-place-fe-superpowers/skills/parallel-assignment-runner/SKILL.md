@@ -37,6 +37,7 @@ Use these skills as checkpoints inside the orchestration:
 - `$toss-place-fe-superpowers:offline-edge-case-checker` (`$offline-edge-case-checker`)
 - `$toss-place-fe-superpowers:final-submit-polisher` (`$final-submit-polisher`)
 - `$toss-place-fe-superpowers:review-fix-loop` (`$review-fix-loop`)
+- `$toss-place-fe-superpowers:commit-push-pr-agent` (`$commit-push-pr-agent`)
 
 ## Workflow
 
@@ -52,6 +53,7 @@ Use these skills as checkpoints inside the orchestration:
 10. Fix Critical findings and requirement/correctness/reliability Important findings.
 11. Re-run verification and repeat the review-fix loop up to 3 times.
 12. Polish final submission and report residual risk.
+13. When the user requests git delivery, hand verified feature-sized commit groups to `$toss-place-fe-superpowers:commit-push-pr-agent`.
 
 ## Slice design
 
@@ -64,6 +66,16 @@ Prefer slices like:
 - README/submission: setup commands, decisions, trade-offs, verification evidence.
 
 Avoid slices that overlap on the same page component, shared provider, package config, or README unless the main thread owns that file and integrates worker findings manually.
+
+## Feature-sized commit discipline
+
+- Workers do not commit.
+- The main thread integrates worker output, verifies, and groups changes by feature slice.
+- Commit groups should be coherent slices such as API layer, UI interaction, reliability states, tests, or README/final polish.
+- Do not commit one file at a time.
+- Do not mix unrelated implementation slices in one commit.
+- Prefer README/final polish as a separate final commit when it is not documenting one specific feature slice.
+- Push and PR creation happen after verification and review-fix loops, not after every worker finishes.
 
 ## Worker prompt template
 
@@ -90,9 +102,12 @@ Engineering rules:
 - Keep state as low as possible.
 - Keep Client Component boundaries small.
 - Separate pure API functions from React Query hooks.
+- Keep `entities/` limited to domain API functions, query options/hooks, API-bound types, and API response mappers.
+- Put common utilities, fetchers, query helpers, UI, config, and constants in `shared/`.
 - Avoid unnecessary dependencies.
 - Cover loading, error, empty, disabled, and pending states when relevant.
 - Do not hide domain mapping or business rules inside JSX.
+- Do not commit or push. The main thread will integrate, verify, and delegate git delivery separately.
 
 Verification:
 <commands this worker can run, or say "do not run full verification; main thread will verify">
@@ -147,6 +162,7 @@ Output:
 - Resolve overlapping assumptions in the main thread.
 - Re-read package scripts before running verification.
 - Run deterministic verification from a clean integrated state.
+- Group verified changes into feature-sized commit candidates.
 - Keep a list of residual risks and known limitations.
 
 ## Verification
@@ -183,6 +199,7 @@ Stop only when all are true:
 - README install/dev/build/test instructions are accurate.
 - Remaining Minor findings are listed in the final report.
 - Residual risks are stated without exaggerating confidence.
+- Feature-sized commit groups are identified when git delivery is requested.
 
 ## Output format
 
@@ -216,4 +233,4 @@ State whether the stop condition is met. If not, state what remains.
 
 ### 8. Final report
 
-Summarize changed files, verification evidence, unresolved Minor findings, known limitations, and residual risk.
+Summarize changed files, feature-sized commit groups, verification evidence, unresolved Minor findings, known limitations, and residual risk.

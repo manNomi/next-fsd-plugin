@@ -232,6 +232,7 @@ For frontend, backend, or full-stack plans, include:
 
 - folder structure
 - API boundaries
+- `entities/` vs `shared/` boundaries
 - data flow
 - state management
 - rendering strategy
@@ -255,6 +256,8 @@ For React/Next.js plans, check:
 - Is React Query hydration aligned with the Next server cache strategy instead of replacing it?
 - Is `app/` only a folder-routing shell that imports the real page from `views/`?
 - Can pure API functions and query hooks be separated?
+- Are `entities/` limited to domain API functions, query options/hooks, API-bound types, and API response mappers?
+- Are common utilities, common fetchers, common query helpers, formatters, UI, and constants moved to `shared/`?
 - Are component responsibilities clear?
 - Is there unnecessary re-render risk?
 
@@ -275,8 +278,17 @@ For API plans, check:
 - Are pure call functions separated from query/mutation hooks?
 - Are query option factories reusable by `prefetchQuery`, hydration, and hooks?
 - Can the structure fit `entities/{domain}/api` or a simpler equivalent?
+- Is every file in `entities/` tied to one domain API?
+- Are common helpers planned under `shared/util`, `shared/api`, `shared/ui`, `shared/config`, or `shared/constants`?
 - Are error types and response types clear enough?
 - Are server state and client state kept separate?
+
+For git delivery planning, check:
+
+- What are the feature-sized commit groups?
+- Which verification commands must pass before each commit group?
+- Is README/final polish separate from implementation commits when possible?
+- Should a git delivery subagent handle commit, push, and PR after verification?
 
 ## Design setup routine
 

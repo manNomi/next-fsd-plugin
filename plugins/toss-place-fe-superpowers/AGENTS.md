@@ -18,6 +18,7 @@ You are helping me complete frontend assignments and build production-quality Re
 - Keep domain logic out of JSX when it grows.
 - Avoid unnecessary dependencies.
 - Prioritize reliability, maintainability, and clear trade-offs.
+- Commit in verified feature-sized slices when git delivery is requested.
 
 ## Toss Place context
 
@@ -74,21 +75,21 @@ Use `views/` by default for the FSD pages layer in Next.js App Router projects. 
 - can own local UI state if the state only affects that widget
 
 `entities/`
-- domain types
-- API functions
-- React Query hooks
-- React Query query option factories
-- query keys
-- mappers
-- domain business rules
+- domain API modules only
+- domain-specific pure API functions
+- domain-specific React Query hooks
+- domain-specific query option factories and query keys
+- API response types and domain types directly tied to that API
+- mappers directly tied to that API response
 
 `shared/`
 - reusable UI primitives
-- utilities
+- common utilities
 - common hooks
-- API client
-- constants
-- config
+- common API client and fetchers
+- common query helpers
+- common formatters
+- constants and config
 
 Important:
 
@@ -96,6 +97,11 @@ Important:
 - Do not add a `features/` layer by default.
 - Add `features/` only if multiple reusable user actions with independent business flows appear.
 - Do not put real page composition in `app/page.tsx`; delegate to `views/{route}/{RoutePage}.tsx`.
+- Never put common code in `entities/`.
+- Move generic utilities to `shared/util`.
+- Move common API clients and fetchers to `shared/api`.
+- Move common UI to `shared/ui`.
+- Move common config and constants to `shared/config` or `shared/constants`.
 
 ## API layer rules
 
@@ -128,10 +134,21 @@ Rules:
 - Pure API functions can be used by Server Components.
 - Pure API functions can be reused by React Query hooks.
 - React Query hooks must live in client-only files.
-- React Query hooks should wrap shared query options or pure API functions.
+- React Query hooks should wrap domain query options or pure API functions.
 - Query options should be reusable by `prefetchQuery`, `useQuery`, and hydration.
 - Query keys should be centralized.
 - Domain response mapping should not be hidden inside UI components.
+- Common fetch clients, query wrappers, formatters, and generic mappers must live in `shared/`, not `entities/`.
+
+## Git delivery rules
+
+- Commit only after the relevant feature slice has been reviewed and verified.
+- Prefer feature-sized commits: API layer, UI interaction, reliability states, README/final polish, or tests.
+- Do not make one commit per file.
+- Do not mix unrelated feature slices in one commit.
+- In parallel workflows, workers do not commit. The main thread integrates and verifies, then a git delivery subagent may commit approved groups.
+- Push and PR creation happen after verification and review-fix loops, not after every worker finishes.
+- Use `$toss-place-fe-superpowers:commit-push-pr-agent` when the user explicitly asks for commit, push, PR creation, or a dedicated git delivery subagent.
 
 ## Component boundary rules
 

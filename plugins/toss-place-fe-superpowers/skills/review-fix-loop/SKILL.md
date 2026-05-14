@@ -14,6 +14,7 @@ Use this after implementation, after a meaningful feature slice, or after integr
 - Verification must be re-run on every loop.
 - Do not call the project ready unless the stop condition is met.
 - Do not hide residual risk. Report it.
+- After the loop passes, identify feature-sized commit candidates when git delivery is requested.
 
 ## Severity
 
@@ -44,6 +45,7 @@ Use this after implementation, after a meaningful feature slice, or after integr
 - Server/Client Component boundaries
 - cache, ISR, `revalidate`, `no-store`, and React Query usage
 - pure API functions, query hooks, query keys, types, and mappers
+- `entities/` only contains domain API-adjacent code, with common code in `shared/`
 - TypeScript safety
 - accessibility and keyboard/touch behavior
 - README setup, decisions, trade-offs, and verification evidence
@@ -64,6 +66,8 @@ Use this after implementation, after a meaningful feature slice, or after integr
 - Do not broaden scope to add new product features.
 - Do not rewrite architecture unless the current design blocks correctness or verification.
 - Do not add dependencies unless the assignment already requires them or the user approves.
+- Do not commit, push, or open a PR from this loop unless the user explicitly asks for git delivery.
+- If git delivery is requested, hand verified feature-sized groups to `$toss-place-fe-superpowers:commit-push-pr-agent`.
 
 ## Stop condition
 
@@ -119,8 +123,8 @@ List unresolved Critical, Important, and Minor findings.
 
 ### 7. Stop / continue decision
 
-State whether to stop, continue to the next loop, or escalate. Include loop count.
+State whether to stop, continue to the next loop, escalate, or hand off to git delivery. Include loop count.
 
 ### 8. Residual risk
 
-State known limitations, manual checks still needed, and any Minor findings intentionally left for final reporting.
+State known limitations, manual checks still needed, feature-sized commit candidates when relevant, and any Minor findings intentionally left for final reporting.

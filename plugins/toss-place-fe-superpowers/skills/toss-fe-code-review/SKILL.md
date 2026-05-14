@@ -18,6 +18,7 @@ Use this before submission or after implementing a meaningful slice. Prioritize 
 - caching strategy
 - React Query usage
 - API layer separation
+- FSD `entities/` vs `shared/` boundary
 - TypeScript safety
 - component responsibility
 - UX states
@@ -66,6 +67,7 @@ Review state ownership, derived state, expensive renders, input/list separation,
 ### 6. API layer review
 
 Review pure API functions, React Query hooks, query keys, types, mappers, error handling, and server/client reuse.
+Confirm `entities/` contains only domain API-adjacent code. Flag common utilities, common fetchers, common query wrappers, generic mappers, shared UI, and global constants inside `entities/` as Important.
 
 ### 7. Edge case review
 
@@ -78,3 +80,4 @@ Review install/dev/build/test instructions, decisions, trade-offs, limitations, 
 ### 9. Recommended patch plan
 
 Provide an ordered patch plan that starts with Critical issues, then Important improvements, then polish.
+Group recommended fixes into feature-sized commit candidates when useful.

@@ -21,6 +21,7 @@ This skill is for planning first. It does not implement the plan unless the user
 - Include a design comparison routine before implementation: page inventory, screenshot inventory, Figma/design matching, and setup implications.
 - If the plan changes during implementation, pause and update the plan before continuing.
 - If the user says "그냥 진행해", proceed from the best current plan.
+- For multi-screen assignments, the finalized plan can still run as repeated question-by-question feedback loops. Use `$toss-place-fe-superpowers:stepwise-assignment-runner` after planning when implementation should proceed one unit at a time.
 
 ## When to use Short Planning Mode
 
@@ -313,5 +314,6 @@ A plan is ready only when all are true:
 - User feedback has been requested.
 - Validation method is defined.
 - The final plan can be executed step by step.
+- Multi-screen work has a question-by-question or screen-by-screen decision loop when needed.
 
 If any item is missing, continue the planning loop.

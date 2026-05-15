@@ -5,13 +5,14 @@ description: Orchestrate a frontend take-home assignment with Codex subagents on
 
 # Parallel Assignment Runner
 
-Use this only when the user explicitly asks for parallel agents, multiple agents, an agent team, delegated work, review loops, or end-to-end assignment execution. For normal assignment help, use the focused skills one by one instead.
+Use this only when the user explicitly asks for parallel agents, multiple agents, an agent team, delegated work, review loops, or end-to-end assignment execution. For normal assignment help, use `$toss-place-fe-superpowers:stepwise-assignment-runner` and focused skills one by one instead.
 
 This skill does not create a new runtime. It is a Codex subagent orchestration workflow for frontend assignments.
 
 ## Hard gates
 
 - Do not spawn subagents unless the user explicitly requested parallel or delegated agent work.
+- Do not use this as the default assignment workflow. The default is question-by-question or screen-by-screen progress with user confirmation.
 - The main thread owns assignment understanding, critical-path decisions, integration, final verification, and final reporting.
 - Do not delegate the immediate blocker if the main thread needs the answer before doing the next step.
 - Delegate only independent slices that can run in parallel.
@@ -29,6 +30,7 @@ Use these skills as checkpoints inside the orchestration:
 
 - `$toss-place-fe-superpowers:assignment-forensics` (`$assignment-forensics`)
 - `$toss-place-fe-superpowers:timeboxed-assignment-operator` (`$timeboxed-assignment-operator`)
+- `$toss-place-fe-superpowers:stepwise-assignment-runner` (`$stepwise-assignment-runner`)
 - `$toss-place-fe-superpowers:commerce-order-flow-auditor` (`$commerce-order-flow-auditor`)
 - `$toss-place-fe-superpowers:stack-setup-planner` (`$stack-setup-planner`)
 - `$toss-place-fe-superpowers:next-rsc-architect` (`$next-rsc-architect`)
@@ -83,6 +85,8 @@ For 24-hour commerce assignments, prefer these worker boundaries when the codeba
 - Cart/order worker: grouped cart view, quantity/remove, total count/price, submit payload, pending/disabled/error states.
 - Completion worker: order lookup, total display, not-found behavior, return-to-menu transition.
 - README/verification worker: read-only or narrow write scope for documentation after implementation decisions are known.
+
+Only parallelize these boundaries after the stepwise workflow has locked the current unit's decisions with the user. Do not let workers decide product behavior independently.
 
 ## Feature-sized commit discipline
 

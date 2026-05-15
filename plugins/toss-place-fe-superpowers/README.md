@@ -10,6 +10,7 @@ This plugin prevents jumping directly into code and instead enforces:
 
 - requirement analysis
 - 24-hour deadline and submission operation
+- question-by-question and screen-by-screen execution
 - product-focused assignment strategy
 - assumptions and trade-off planning
 - stack selection
@@ -36,6 +37,7 @@ Use this plugin when:
 
 - starting a frontend assignment
 - running a strict 24-hour assignment with branch, PR, and no-post-submit-commit rules
+- solving a multi-screen assignment one question at a time with user confirmation
 - auditing menu, option, cart, order submit, and order completion flows
 - deciding between Vite and Next.js
 - designing Next.js RSC architecture
@@ -60,7 +62,7 @@ Use this plugin when:
 Use this when you want to control each step yourself:
 
 1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
-2. `$toss-place-fe-superpowers:planning-feedback-loop`
+2. `$toss-place-fe-superpowers:stepwise-assignment-runner`
 3. `$toss-place-fe-superpowers:product-assignment-strategist`
 4. `$toss-place-fe-superpowers:assignment-forensics`
 5. `$toss-place-fe-superpowers:commerce-order-flow-auditor`
@@ -86,16 +88,28 @@ Use this before implementation when the task is non-trivial and you want to refi
 
 1. `$toss-place-fe-superpowers:planning-feedback-loop`
 2. Confirm or revise the plan.
-3. Continue with the manual workflow or the end-to-end orchestrator workflow.
+3. Continue with the stepwise assignment workflow or the manual workflow.
 
 The planning feedback loop restates the goal, drafts a plan, asks for focused feedback, revises the plan, reviews risk and validation, and only then finalizes an executable plan.
+
+### Stepwise assignment workflow
+
+Use this as the default execution workflow after initial deadline and requirement analysis:
+
+1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
+2. `$toss-place-fe-superpowers:stepwise-assignment-runner`
+3. Work one question or screen at a time.
+4. Confirm decisions with the user before implementing each unit.
+5. Verify the unit, report residual risk, then propose the next unit.
+
+This workflow prevents "implement everything at once" behavior. It is the default for multi-screen assignments unless the user explicitly asks for parallel agents or one-shot execution.
 
 ### Product-focused assignment workflow
 
 Use this when the assignment may evaluate existing codebase adaptation, product judgment, assumptions, trade-offs, reviewer-readable code, README quality, or AI usage verification:
 
 1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
-2. `$toss-place-fe-superpowers:planning-feedback-loop`
+2. `$toss-place-fe-superpowers:stepwise-assignment-runner`
 3. `$toss-place-fe-superpowers:product-assignment-strategist`
 4. `$toss-place-fe-superpowers:assignment-forensics`
 
@@ -106,10 +120,11 @@ The product assignment strategist treats Toss-style context as likely evaluation
 Use this when the assignment resembles an offline-commerce order flow with a hard deadline, feature branch, PR submission, ignored tests, menus, options, cart, order submit, or completion screens:
 
 1. `$toss-place-fe-superpowers:timeboxed-assignment-operator`
-2. `$toss-place-fe-superpowers:product-assignment-strategist`
-3. `$toss-place-fe-superpowers:assignment-forensics`
-4. `$toss-place-fe-superpowers:commerce-order-flow-auditor`
-5. Continue with architecture, implementation, review, final polish, and git delivery skills.
+2. `$toss-place-fe-superpowers:stepwise-assignment-runner`
+3. `$toss-place-fe-superpowers:product-assignment-strategist`
+4. `$toss-place-fe-superpowers:assignment-forensics`
+5. `$toss-place-fe-superpowers:commerce-order-flow-auditor`
+6. Continue with architecture, implementation, review, final polish, and git delivery skills.
 
 This workflow treats deadline rules as requirements. It also audits option rules, cart grouping, price calculation, payload correctness, duplicate submit prevention, Toast/error handling, and final no-commit-after-submit freeze.
 
@@ -143,6 +158,18 @@ If any check fails, the git delivery agent should stop before opening a PR and r
 ```text
 $toss-place-fe-superpowers:timeboxed-assignment-operator
 Plan this 24-hour frontend assignment around deadline, feature branch, trusted tests, ignored E2E, PR timing, and final no-commit freeze.
+```
+
+### `$toss-place-fe-superpowers:stepwise-assignment-runner`
+
+```text
+$toss-place-fe-superpowers:stepwise-assignment-runner
+문항별로 하나씩 요구사항과 선택지를 정리하고, 내 확인을 받은 뒤 구현/검증/다음 문항으로 진행해줘.
+```
+
+```text
+$toss-place-fe-superpowers:stepwise-assignment-runner
+Run this assignment question by question. Before each screen, show decision points, recommend defaults, ask for confirmation, then implement and verify only that unit.
 ```
 
 ### `$toss-place-fe-superpowers:commerce-order-flow-auditor`
@@ -314,6 +341,8 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - Review tests by behavior value: regression, state transition, pure logic, accessibility, and failure modes before static copy.
 - Treat assignment-ignored tests as non-blocking and document why.
 - Treat deadline, target branch, PR submission, and post-submit freeze rules as requirements.
+- Do not implement all assignment questions or screens at once.
+- Lock decisions one question or screen at a time with the user before implementing that unit.
 - Audit commerce order flows through API contract, option rules, cart grouping, pricing, payload, submit, and completion state machines.
 - Separate pure API functions from React Query hooks.
 - Keep query option factories reusable across `prefetchQuery`, hydration, and hooks.
@@ -344,6 +373,7 @@ Check README, scripts, verification commands, trade-offs, limitations, final dif
 - The plugin is Codex-first and does not include hooks, MCP servers, assets, or non-Codex platform support.
 - This is not a new agent runtime; it is a Codex subagent orchestration workflow.
 - The git delivery agent is a skill workflow, not a new git runtime.
+- Stepwise execution adds conversation checkpoints and can be slower than one-shot implementation, but it reduces wrong-direction work.
 - Parallel work can increase token and time cost.
 - If worker write scopes overlap, the main thread must stop and coordinate before continuing.
 - Feature-sized commits depend on a clean diff and clear slice boundaries.

@@ -15,6 +15,7 @@ Use this after implementation, after a meaningful feature slice, or after integr
 - Do not call the project ready unless the stop condition is met.
 - Do not hide residual risk. Report it.
 - After the loop passes, identify feature-sized commit candidates when git delivery is requested.
+- For stepwise assignment work, run a lightweight review after each confirmed question or screen, then reserve the full loop for final integration or high-risk findings.
 
 ## Severity
 
@@ -127,4 +128,4 @@ State whether to stop, continue to the next loop, escalate, or hand off to git d
 
 ### 8. Residual risk
 
-State known limitations, manual checks still needed, feature-sized commit candidates when relevant, and any Minor findings intentionally left for final reporting.
+State known limitations, manual checks still needed, the current question/screen status, feature-sized commit candidates when relevant, and any Minor findings intentionally left for final reporting.

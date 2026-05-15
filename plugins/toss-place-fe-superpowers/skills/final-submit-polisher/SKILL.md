@@ -32,6 +32,7 @@ Use this after implementation and review, before submitting a frontend assignmen
 - FSD `entities/` vs `shared/` boundary explanation
 - final changed files
 - feature-sized commit grouping
+- question/screen completion status table
 - target branch pushed, especially `feature` when required
 - PR URL and submission link readiness
 - deadline and no-commit-after-submit rules
@@ -58,7 +59,7 @@ List install, dev, build, lint, typecheck, trusted test, ignored test, and manua
 
 ### 4. Implementation summary
 
-Summarize what was built in reviewer-friendly language.
+Summarize what was built in reviewer-friendly language. Include a question/screen completion table with done, partial, not done, verification, and README note columns when the assignment has multiple units.
 
 ### 5. Key decisions
 

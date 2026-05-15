@@ -15,6 +15,8 @@ Use this at the start of a frontend take-home assignment with a hard deadline, r
 - Prioritize submitting a truthful PR before the deadline over chasing unfinished polish.
 - After PR submission, enter submission freeze: do not commit, amend, force-push, or push follow-up commits unless the assignment explicitly allows it.
 - In the final 90 minutes, stop starting new major features. Focus on verification, README, PR creation, submission link, and honest residual risk.
+- Break the assignment into question-by-question or screen-by-screen milestones before implementation.
+- Define the minimum milestone cutline that must be complete before the final 90 minutes.
 
 ## Setup checks
 
@@ -35,6 +37,8 @@ For a 24-hour assignment, use this default budget unless the user gives a differ
 - Final 90 minutes: verification, final diff scan, PR, submission link, no-commit freeze.
 
 If time is already low, compress scope instead of skipping verification.
+
+Track the time budget per question or screen. For commerce assignments, prefer milestones like shared API/domain model, menu/list, detail/options, cart, submit, complete, tests/README/submission.
 
 ## Cutline rules
 
@@ -70,7 +74,7 @@ Classify tests as trusted, ignored by assignment, stale, missing, or manual-only
 
 ### 4. 24-hour execution budget
 
-Allocate time blocks for planning, MVP, reliability/tests, README, PR, and final freeze.
+Allocate time blocks for planning, each question/screen milestone, MVP, reliability/tests, README, PR, and final freeze.
 
 ### 5. Feature slice plan
 
@@ -82,7 +86,7 @@ Define when to commit, when to push, when to create PR, and when to stop committ
 
 ### 7. Cutline rules
 
-List what to drop first and what must not be dropped.
+List what to drop first, what must not be dropped, and which question/screen milestones must be done before the final 90 minutes.
 
 ### 8. Final 90-minute protocol
 

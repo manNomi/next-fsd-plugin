@@ -60,6 +60,7 @@ Use the plugin skills with the marketplace namespace:
 ```text
 $toss-place-fe-superpowers:assignment-forensics
 $toss-place-fe-superpowers:timeboxed-assignment-operator
+$toss-place-fe-superpowers:stepwise-assignment-runner
 $toss-place-fe-superpowers:commerce-order-flow-auditor
 $toss-place-fe-superpowers:product-assignment-strategist
 $toss-place-fe-superpowers:stack-setup-planner
@@ -106,6 +107,11 @@ For a 24-hour commerce/order assignment:
 ```text
 $toss-place-fe-superpowers:timeboxed-assignment-operator
 Run this assignment around deadline, feature branch, trusted tests, ignored E2E, PR timing, and no-commit-after-submit freeze.
+```
+
+```text
+$toss-place-fe-superpowers:stepwise-assignment-runner
+문항별로 하나씩 요구사항과 선택지를 정리하고, 내 확인을 받은 뒤 구현/검증/다음 문항으로 진행해줘.
 ```
 
 ```text

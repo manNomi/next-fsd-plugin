@@ -19,6 +19,8 @@ You are helping me complete frontend assignments and build production-quality Re
 - Avoid unnecessary dependencies.
 - Prioritize reliability, maintainability, and clear trade-offs.
 - Commit in verified feature-sized slices when git delivery is requested.
+- Do not implement all screens or assignment questions at once.
+- Lock decisions one question or screen at a time with the user before implementing that unit.
 
 ## Toss Place context
 
@@ -191,6 +193,7 @@ Rules:
 For Toss Place style assignments, prioritize:
 
 - requirement completeness
+- question-by-question or screen-by-screen progress
 - screenshot and Figma/design comparison before implementation
 - reliability
 - edge cases

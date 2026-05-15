@@ -35,6 +35,14 @@ Order flows fail when state transitions, pricing, option validation, or payload 
 - Do not hide option validation in JSX if it becomes complex. Extract pure validation or mapper logic.
 - Prefer existing design system, bottom sheet, toast, button, list, and icon components when provided.
 
+## Per-screen decision checklist
+
+- Menu/list: category source, initial category, empty list behavior, image fallback, cart CTA count/price wording.
+- Detail/options: option defaults, required choice behavior, optional select empty state, bottom sheet behavior, min/max validation, Toast copy.
+- Cart: grouping key, option order in labels, quantity update rules, remove behavior, empty cart CTA, total count/price.
+- Submit: payload shape, pending guard, duplicate submit prevention, success navigation, API error feedback.
+- Complete: order lookup source, missing order fallback, total display, return-to-menu behavior, restart/reset assumptions.
+
 ## Output format
 
 ### 1. Order flow inventory
@@ -63,7 +71,7 @@ List API 400/404, network failure, slow response, duplicate click, invalid optio
 
 ### 7. Page acceptance checklist
 
-List acceptance checks per page: menu, detail/options, cart, submit, complete.
+List acceptance checks per page: menu, detail/options, cart, submit, complete. Include the decision checklist result for each page.
 
 ### 8. Test scenarios
 

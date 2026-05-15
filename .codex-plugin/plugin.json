@@ -1,0 +1,68 @@
+{
+  "name": "toss-place-fe-superpowers",
+  "version": "0.1.0",
+  "description": "A focused Vite React frontend take-home assignment plugin for Toss Place style product work. It helps with deadline rules, question-by-question execution, requirement analysis, product assumptions, Vite architecture, Simple FSD, API and React Query design, component boundaries, abstraction review, reliability checks, test quality, README rationale, and final submission polish.",
+  "author": {
+    "name": "Manwook Han",
+    "url": "https://github.com/manNomi"
+  },
+  "repository": "https://github.com/manNomi/next-fsd-plugin",
+  "license": "MIT",
+  "keywords": [
+    "frontend",
+    "react",
+    "typescript",
+    "vite",
+    "spa",
+    "fsd",
+    "assignment",
+    "take-home",
+    "toss-place",
+    "reliability",
+    "architecture",
+    "product-assignment",
+    "commerce-order",
+    "cart",
+    "option-selection",
+    "order-flow",
+    "deadline",
+    "feature-branch",
+    "submission-freeze",
+    "ignored-e2e",
+    "stepwise",
+    "question-by-question",
+    "screen-by-screen",
+    "decision-loop",
+    "user-confirmation",
+    "tanstack-query",
+    "view-model",
+    "naming-smell",
+    "separation-of-concerns",
+    "reviewer-readable-code",
+    "abstraction-boundary",
+    "test-quality",
+    "readme-rationale",
+    "requirement-conflict",
+    "fsd-boundary-smell"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Toss Place FE Superpowers",
+    "shortDescription": "Vite React take-home workflow for Toss Place style frontend assignments",
+    "longDescription": "A Codex-first standalone skill pack for frontend take-home assignments, especially Toss Place and offline-commerce-like products. It guides deadline rules, question-by-question execution, product-focused requirement analysis, assumptions, trade-offs, Vite React architecture, Simple FSD structure, API layer design, React Query decisions, component boundaries, abstraction boundary review, reliability checks, test quality review, README rationale writing, and final submission polish.",
+    "developerName": "Manwook Han",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Run the assignment question by question.",
+      "Plan a Vite React assignment architecture.",
+      "Review abstraction and view boundaries."
+    ],
+    "brandColor": "#0064FF",
+    "screenshots": []
+  }
+}

@@ -1,112 +1,72 @@
-# Next FSD Plugin
+# Toss Place FE Superpowers
 
-Codex-only marketplace repository for frontend assignment workflow plugins.
+A standalone Codex plugin for starting a frontend take-home assignment with a focused Vite React workflow.
 
-## Included Plugin
+This repo is intentionally small: clone it before an assignment, enable the plugin in Codex, then use the skills to analyze the prompt, make decisions one screen at a time, implement carefully, review the result, and polish the final submission.
 
-- `toss-place-fe-superpowers`: a Codex skill pack and subagent orchestration workflow for Toss Place style frontend take-home assignments.
+## What This Helps With
 
-## Install in Codex
+- deadline and submission rules
+- question-by-question assignment progress
+- requirement and hidden evaluation analysis
+- product assumptions and trade-offs
+- Vite React TypeScript architecture
+- Simple FSD without architecture-only folders
+- API layer and React Query decisions
+- component boundaries and re-render risks
+- over-abstraction, naming, and view model review
+- reliability and offline-commerce edge cases
+- test quality review
+- README rationale and final submission polish
 
-Codex currently reads this marketplace from a local filesystem path. Clone the GitHub repository first:
+## Start An Assignment
 
-```bash
-git clone https://github.com/manNomi/next-fsd-plugin.git
-cd next-fsd-plugin
-```
+1. Clone this repo.
+2. Enable this directory as a local Codex plugin.
+3. Restart Codex.
+4. Start the assignment from the target project directory.
+5. Use the stepwise flow below.
 
-Then add this marketplace to `~/.codex/config.toml`. Replace the `source` value with the absolute path where you cloned this repository:
+## Recommended Flow
 
-```toml
-[marketplaces.next-fsd-plugin]
-source_type = "local"
-source = "/Users/your-name/path/to/next-fsd-plugin"
-
-[plugins."toss-place-fe-superpowers@next-fsd-plugin"]
-enabled = true
-```
-
-Restart Codex completely, then start a new session. The plugin should appear as `Toss Place FE Superpowers`.
-
-To update the plugin later:
-
-```bash
-cd /Users/your-name/path/to/next-fsd-plugin
-git pull
-```
-
-Then restart Codex again.
-
-## Verify Installation
-
-In a new Codex session, try:
+Use these skills in order for a typical Toss-style product assignment:
 
 ```text
-$toss-place-fe-superpowers:assignment-forensics
-```
-
-If Codex says `$assignment-forensics` is not installed, use the namespaced marketplace skill name instead:
-
-```text
-$toss-place-fe-superpowers:assignment-forensics
-```
-
-Marketplace plugin skills are exposed with the plugin namespace.
-
-## Skill Usage
-
-Use the plugin skills with the marketplace namespace:
-
-```text
-$toss-place-fe-superpowers:assignment-forensics
 $toss-place-fe-superpowers:timeboxed-assignment-operator
 $toss-place-fe-superpowers:stepwise-assignment-runner
-$toss-place-fe-superpowers:commerce-order-flow-auditor
 $toss-place-fe-superpowers:product-assignment-strategist
+$toss-place-fe-superpowers:assignment-forensics
 $toss-place-fe-superpowers:stack-setup-planner
-$toss-place-fe-superpowers:next-rsc-architect
+$toss-place-fe-superpowers:vite-react-architect
 $toss-place-fe-superpowers:simple-fsd-architect
 $toss-place-fe-superpowers:api-layer-designer
 $toss-place-fe-superpowers:component-boundary-planner
+$toss-place-fe-superpowers:abstraction-boundary-reviewer
 $toss-place-fe-superpowers:reliability-first-planner
-$toss-place-fe-superpowers:planning-feedback-loop
-$toss-place-fe-superpowers:react-best-practices
-$toss-place-fe-superpowers:test-quality-reviewer
-$toss-place-fe-superpowers:readme-rationale-writer
-$toss-place-fe-superpowers:parallel-assignment-runner
-$toss-place-fe-superpowers:review-fix-loop
 $toss-place-fe-superpowers:toss-fe-code-review
+$toss-place-fe-superpowers:test-quality-reviewer
 $toss-place-fe-superpowers:offline-edge-case-checker
+$toss-place-fe-superpowers:readme-rationale-writer
 $toss-place-fe-superpowers:final-submit-polisher
-$toss-place-fe-superpowers:commit-push-pr-agent
 ```
 
-For an end-to-end orchestrated assignment run:
+For commerce/order-flow assignments, add:
 
 ```text
-$toss-place-fe-superpowers:parallel-assignment-runner
-Use parallel-assignment-runner to complete this frontend assignment with parallel agents, review-fix loops, verification, and final submission polish.
+$toss-place-fe-superpowers:commerce-order-flow-auditor
 ```
 
-For a planning-first feedback loop before implementation:
+For React performance review, add:
 
 ```text
-$toss-place-fe-superpowers:planning-feedback-loop
-이 프론트엔드 과제 구현 전에 목표, 범위, 설계 방향, 리스크, 검증 방법을 피드백 루프로 정리해줘.
+$toss-place-fe-superpowers:react-best-practices
 ```
 
-For product-focused assignment strategy:
-
-```text
-$toss-place-fe-superpowers:product-assignment-strategist
-이 제품 중심 프론트엔드 과제를 기존 코드베이스 적응, 가정, 트레이드오프, README 제출 전략까지 포함해서 분석해줘.
-```
-
-For a 24-hour commerce/order assignment:
+## Practical Starter Prompts
 
 ```text
 $toss-place-fe-superpowers:timeboxed-assignment-operator
-Run this assignment around deadline, feature branch, trusted tests, ignored E2E, PR timing, and no-commit-after-submit freeze.
+이 과제의 제한시간, 제출 브랜치, PR 규칙, 제출 후 커밋 금지 조건을 먼저 정리해줘.
 ```
 
 ```text
@@ -115,43 +75,59 @@ $toss-place-fe-superpowers:stepwise-assignment-runner
 ```
 
 ```text
-$toss-place-fe-superpowers:commerce-order-flow-auditor
-Audit menu, option selection, cart grouping, pricing, order payload, duplicate submit, Toast errors, and completion flow.
+$toss-place-fe-superpowers:vite-react-architect
+Vite React TypeScript 기준으로 routing, API layer, React Query, state placement, FSD, verification을 설계해줘.
 ```
-
-For a React/Next.js performance review:
 
 ```text
-$toss-place-fe-superpowers:react-best-practices
-Review this Next.js assignment with react-best-practices and prioritize waterfalls, bundle size, RSC boundaries, cache strategy, and re-render risks.
+$toss-place-fe-superpowers:abstraction-boundary-reviewer
+Page/View가 raw API/error 상태를 너무 많이 알고 있는지, generic abstraction이 과한지 리뷰해줘.
 ```
-
-For test quality review:
 
 ```text
-$toss-place-fe-superpowers:test-quality-reviewer
-Review these tests for low-value copy checks, bug-locking expectations, missing regression coverage, pure logic coverage, and accessibility states.
+$toss-place-fe-superpowers:final-submit-polisher
+README, 실행 방법, 검증 커맨드, 구현 범위, trade-off, known limitation, 최종 diff를 제출 전 기준으로 점검해줘.
 ```
 
-For README rationale writing:
+## Core Principles
 
-```text
-$toss-place-fe-superpowers:readme-rationale-writer
-Draft README rationale sections for Design Rationale, API / Cache Strategy, React Query Trade-off, FSD Boundary, Error Handling Strategy, Test Strategy, Known Limitations, and Verification Evidence.
-```
+- Do not implement everything at once.
+- Move one question or screen at a time.
+- Ask for user confirmation before locking behavior.
+- Prefer Vite + React + TypeScript unless the assignment clearly provides another stack.
+- Respect the existing project structure and design system.
+- Keep `entities/` limited to domain API-adjacent code.
+- Put common utilities, fetchers, UI, config, constants, and generic helpers in `shared/`.
+- Separate pure API functions from React Query hooks.
+- Use React Query only when server state management adds value.
+- Prefer explicit domain names and view models over generic wrappers.
+- Optimize for reviewer-readable code, not impressive architecture.
+- Treat README as part of the submitted product.
 
-For verified git delivery:
+## Included Skills
 
-```text
-$toss-place-fe-superpowers:commit-push-pr-agent
-Use commit-push-pr-agent to create feature-sized commits, push the branch, and open a PR after verification.
-```
+- `timeboxed-assignment-operator`
+- `stepwise-assignment-runner`
+- `product-assignment-strategist`
+- `assignment-forensics`
+- `commerce-order-flow-auditor`
+- `stack-setup-planner`
+- `vite-react-architect`
+- `simple-fsd-architect`
+- `api-layer-designer`
+- `component-boundary-planner`
+- `abstraction-boundary-reviewer`
+- `reliability-first-planner`
+- `react-best-practices`
+- `test-quality-reviewer`
+- `toss-fe-code-review`
+- `offline-edge-case-checker`
+- `readme-rationale-writer`
+- `final-submit-polisher`
 
-For upstream or third-party PR safety:
+## Limitations
 
-```text
-$toss-place-fe-superpowers:commit-push-pr-agent
-Before opening this upstream PR, read the PR template, search existing PRs/issues, verify the problem is real, confirm the change belongs in core, and show me the complete diff and PR body.
-```
-
-See `plugins/toss-place-fe-superpowers/README.md` for the full workflow.
+- This plugin does not guarantee passing an assignment.
+- It is a workflow guide, not a replacement for engineering judgment.
+- It assumes a frontend product assignment, usually close to Vite React.
+- Commerce/order-flow checks should be adapted if the assignment domain is different.
